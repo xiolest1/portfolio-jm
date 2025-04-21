@@ -1005,6 +1005,35 @@
       margin-top: -80px; /* Offset the padding */
       scroll-margin-top: 80px; /* Modern browsers support */
     }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .tech-stack span {
+      background: rgba(132, 94, 194, 0.1);
+      border: 1px solid rgba(132, 94, 194, 0.3);
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.9rem;
+      color: #cccccc;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Remove hover styles */
+    .tech-stack span:hover {
+      background: rgba(132, 94, 194, 0.1);
+      border-color: rgba(132, 94, 194, 0.3);
+    }
+
+    .project-image {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -1128,7 +1157,7 @@
           <p>A modern web application built with React and Node.js, featuring real-time updates and responsive design.</p>
           <div class="project-links">
             <a href="https://pokemon-site-nine.vercel.app" target="_blank">Live Demo</a>
-            <a href="https://github.com/xiolest1/pokemon-site" class="github" target="_blank">View Code</a>
+            <a href="https://github.com/xiolest1/pokemon-site" class="github" target="_blank">View Project</a>
           </div>
         </div>
         <div class="project-image" onclick="window.open('https://pokemon-site-nine.vercel.app', '_blank')">
@@ -1136,36 +1165,53 @@
             <img src="image/dark_theme_pokedex.png" alt="Pokemon Site Preview">
           </div>
           <h3>Pokédex Site</h3>
+          <div class="tech-stack">
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>Javascript</span>
+          </div>
         </div>
       </div>
       <div class="project-item">
         <div class="project-content">
-          <h3>Project Two</h3>
-          <p>An e-commerce platform with secure payment integration and inventory management system.</p>
+          <h3>3D-Printed Robot Gripper</h3>
+          <p>A servo-controlled 3D-printed robotic gripper system with a Python GUI interface for real-time control via Arduino. Features customtkinter for enhanced UX and pyserial for reliable communication.</p>
           <div class="project-links">
-            <a href="#" target="_blank">View Project</a>
+            <a href="https://github.com/xiolest1/Robot-Gripper" target="_blank" class="github">View Project</a>
           </div>
         </div>
-        <div class="project-image">
+        <div class="project-image" onclick="window.open('https://github.com/xiolest1/Robot-Gripper', '_blank')">
           <div class="preview-container">
-            <img src="path_to_project_two_preview.png" alt="Project Two Preview">
+            <img src="image/robot_gripper.jpg" alt="Robot Gripper Preview">
           </div>
-          <h3>Project Two</h3>
+          <h3>3D-Printed Robot Gripper</h3>
+          <div class="tech-stack">
+            <span>Python</span>
+            <span>Arduino</span>
+            <span>CustomTkinter</span>
+            <span>PySerial</span>
+          </div>
         </div>
       </div>
       <div class="project-item">
         <div class="project-content">
-          <h3>Project Three</h3>
-          <p>A data visualization dashboard built with D3.js and Express, providing real-time analytics.</p>
+          <h3>RC Detection System</h3>
+          <p>An autonomous RC vehicle system using computer vision and Python. Features camera calibration, real-time object detection using multiple algorithms (ORB, SIFT, AKAZE), and Arduino-based motor control. The system can track and navigate towards target objects while dynamically adjusting steering and speed.</p>
           <div class="project-links">
-            <a href="#" target="_blank">View Project</a>
+            <a href="https://github.com/xiolest1/RCDetection" class="github" target="_blank">View Project</a>
           </div>
         </div>
-        <div class="project-image">
+        <div class="project-image" onclick="window.open('https://github.com/xiolest1/RCDetection', '_blank')">
           <div class="preview-container">
-            <img src="path_to_project_three_preview.png" alt="Project Three Preview">
+            <img src="image/rc_car.jpg" alt="RC Detection System Preview">
           </div>
-          <h3>Project Three</h3>
+          <h3>RC Detection System</h3>
+          <div class="tech-stack">
+            <span>Python</span>
+            <span>Arduino</span>
+            <span>OpenCV</span>
+            <span>NumPy</span>
+          </div>
         </div>
       </div>
     </section>
