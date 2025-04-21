@@ -1009,7 +1009,7 @@
           value: 80,
           density: {
             enable: true,
-            value_area:550
+            value_area: 800  // Increased from 550 to 800 for better coverage
           }
         },
         color: {
@@ -1035,7 +1035,7 @@
         },
         move: {
           enable: true,
-          speed: 0.6, 
+          speed: 0.6,
           direction: 'none',
           random: false,
           straight: false,
@@ -1044,7 +1044,7 @@
         }
       },
       interactivity: {
-        detect_on: 'canvas',
+        detect_on: 'parent',  // Changed from 'canvas' to 'parent'
         events: {
           onhover: {
             enable: true,
@@ -1058,7 +1058,7 @@
         },
         modes: {
           grab: {
-            distance: 140,
+            distance: 200,  // Increased from 140 to 200
             line_linked: {
               opacity: 1
             }
