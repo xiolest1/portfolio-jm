@@ -6,14 +6,14 @@
       "use": "@vercel/static"
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/image/(.*)",
-      "destination": "/Portfolio/image/$1"
+      "src": "/image/(.*)",
+      "dest": "/Portfolio/image/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/Portfolio/index.html"
+      "src": "/(.*)",
+      "dest": "/Portfolio/index.html"
     }
   ],
   "headers": [
