@@ -9,7 +9,17 @@
   "routes": [
     {
       "src": "/image/(.*)",
-      "dest": "/Portfolio/image/$1"
+      "dest": "/Portfolio/image/$1",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/(.*\\.(gif|jpe?g|png|ico)$)",
+      "dest": "/Portfolio/$1",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
     },
     {
       "src": "/(.*)",
