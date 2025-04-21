@@ -8,6 +8,10 @@
   ],
   "rewrites": [
     {
+      "source": "/image/(.*)",
+      "destination": "/Portfolio/image/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/Portfolio/index.html"
     }
