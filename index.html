@@ -306,22 +306,31 @@
         top: 0;
         left: 0;
         padding: 15px 0;
+        height: 60px; /* Set explicit height */
+        display: flex;
+        align-items: center;
+        margin: 0;
+        border-bottom: none; /* Remove bottom border from nav */
       }
 
       .hamburger {
         display: flex;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
       .nav-menu ul {
         position: fixed;
-        top: 60px; /* Height of nav bar */
+        top: 60px; /* Match exact nav height */
         left: 0;
         width: 100%;
         flex-direction: column;
         background: rgba(10, 10, 10, 0.95);
         backdrop-filter: blur(5px);
-        padding: 20px 0;
+        padding: 0; /* Remove padding */
+        margin: 0;
         display: none;
+        border-top: 1px solid #333; /* Add top border to dropdown */
         border-bottom: 1px solid #333;
       }
 
@@ -330,9 +339,14 @@
       }
 
       .nav-menu ul li {
-        margin: 10px 0;
+        margin: 0; /* Remove margins */
         width: 100%;
         text-align: center;
+        border-bottom: 1px solid rgba(51, 51, 51, 0.5);
+      }
+
+      .nav-menu ul li:last-child {
+        border-bottom: none;
       }
 
       .nav-menu ul li a {
@@ -492,6 +506,36 @@
     }
 
     /* Static Logo Animations */
+    /* HTML5 Animation */
+    @keyframes floatRotate {
+      0%, 100% { 
+        transform: translateX(-50%) translateY(0) rotate(0deg);
+      }
+      50% { 
+        transform: translateX(-50%) translateY(-15px) rotate(5deg);
+      }
+    }
+    .skill-logo.html-logo .static-logo {
+      animation: floatRotate 3s ease-in-out infinite;
+      display: block !important;
+    }
+
+    /* JavaScript Animation */
+    @keyframes pulseGlow {
+      0%, 100% { 
+        transform: translateX(-50%) scale(1);
+        filter: drop-shadow(0 0 0 rgba(247, 223, 30, 0));
+      }
+      50% { 
+        transform: translateX(-50%) scale(1.1);
+        filter: drop-shadow(0 0 10px rgba(247, 223, 30, 0.5));
+      }
+    }
+    .skill-logo.javascript-logo .static-logo {
+      animation: pulseGlow 2s ease-in-out infinite;
+      display: block !important;
+    }
+
     /* C++ Animation */
     @keyframes flip3D {
       0% { transform: translateX(-50%) rotateY(0deg); }
@@ -546,19 +590,39 @@
     }
 
     /* Linux Animation */
-    @keyframes pulseGlow {
+    @keyframes linuxPulse {
       0%, 100% { 
-        transform: translateX(-50%) scale(1);
-        filter: brightness(1);
+        transform: translateX(-50%) scale(1) rotate(0deg);
+        filter: brightness(1) hue-rotate(0deg);
       }
       50% { 
-        transform: translateX(-50%) scale(1.2);
-        filter: brightness(1.3);
+        transform: translateX(-50%) scale(1.15) rotate(-180deg);
+        filter: brightness(1.2) hue-rotate(-180deg);
       }
     }
     .skill-logo.linux-logo .static-logo {
-      animation: pulseGlow 1.5s ease infinite;
+      animation: linuxPulse 3s ease-in-out infinite;
       display: block !important;
+    }
+
+    /* Larger sizes for specific GIF logos */
+    .skill-logo.html-logo .static-logo {
+      width: 60px;
+      height: 60px;
+      top: 25px;
+    }
+
+    .skill-logo.javascript-logo .static-logo {
+      width: 60px;
+      height: 60px;
+      top: 25px;
+    }
+
+    .skill-logo.node-logo .animated-logo,
+    .skill-logo.react-logo .animated-logo {
+      width: 80px;
+      height: 80px;
+      top: 20px;
     }
 
     /* Mobile Responsive Design */
@@ -1103,13 +1167,11 @@
           <!-- HTML -->
           <div class="skill-logo html-logo">
             <img src="image/logos/html_logo.png" alt="HTML5" class="static-logo">
-            <img src="image/logos/html_gif.gif" alt="HTML5" class="animated-logo">
             <span>HTML5</span>
           </div>
           <!-- JavaScript -->
-          <div class="skill-logo">
-            <img src="image/logos/javascript_logo.png" alt="JavaScript" class="static-logo">
-            <img src="image/logos/javascript_gif.gif" alt="JavaScript" class="animated-logo">
+          <div class="skill-logo javascript-logo">
+            <img src="image/logos/javascript_logo_svg.svg" alt="JavaScript" class="static-logo">
             <span>JavaScript</span>
           </div>
           <!-- Linux -->
