@@ -678,6 +678,13 @@
       margin-bottom: 60px;
       font-size: 2.5rem;
       color: #ffffff;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 2s ease-out;
+    }
+    .projects-section h2.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
     .project-item {
       display: flex;
@@ -804,6 +811,13 @@
       margin-bottom: 40px;
       font-size: 2.5rem;
       color: #ffffff;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 2s ease-out;
+    }
+    .contact-section h2.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
     .contact-form {
       max-width: 600px;
@@ -1837,8 +1851,6 @@
 
     // Add this to your existing script section
     document.addEventListener('DOMContentLoaded', () => {
-      // Existing observers...
-
       // Project items observer
       const projectObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1852,6 +1864,10 @@
       const projectItems = document.querySelectorAll('.project-item');
       projectItems.forEach(item => projectObserver.observe(item));
 
+      // Observe Projects header
+      const projectsHeader = document.querySelector('.projects-section h2');
+      projectObserver.observe(projectsHeader);
+
       // Contact form observer
       const contactFormObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1864,6 +1880,10 @@
       // Observe contact form
       const contactForm = document.querySelector('.contact-form');
       contactFormObserver.observe(contactForm);
+
+      // Observe Contact header
+      const contactHeader = document.querySelector('.contact-section h2');
+      contactFormObserver.observe(contactHeader);
     });
 
     // Add this to your existing script section
