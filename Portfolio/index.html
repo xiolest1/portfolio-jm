@@ -19,7 +19,7 @@
     .custom-cursor {
       width: 24px;
       height: 24px;
-      background-image: url('/image/earth_cursor.png');
+      background-image: url('image/earth_cursor.png');
       background-size: contain;
       background-repeat: no-repeat;
       position: fixed;
@@ -46,13 +46,15 @@
       width: 100%;
       height: 100%;
       z-index: 0;
+      pointer-events: none;
     }
 
     /* Main Content */
     .main-content {
       position: relative;
       z-index: 1;
-      margin-top: 0; /* Remove any top margin */
+      margin-top: 0;
+      pointer-events: auto;
     }
 
     /* Navigation */
@@ -94,6 +96,7 @@
       justify-content: center;
       overflow: visible;
       padding-bottom: 0;
+      pointer-events: none;
     }
 
     #header-particles {
@@ -103,7 +106,8 @@
       width: 100%;
       height: 100%;
       z-index: 1;
-      clip-path: inset(0 0 0 0); /* Remove bottom clip */
+      clip-path: inset(0 0 0 0);
+      pointer-events: auto;
     }
 
     .hero-content {
@@ -112,6 +116,7 @@
       text-align: center;
       max-width: 800px;
       padding: 0 20px;
+      pointer-events: auto;
     }
 
     .profile-picture {
@@ -770,7 +775,7 @@
     <div id="header-particles"></div>
     <div class="hero-content">
       <div class="profile-picture">
-        <img src="/image/profile_picture.png" alt="Joan Morillo">
+        <img src="image/profile_picture.png" alt="Joan Morillo">
       </div>
       <div class="hero-text">
         <h1>Joan Morillo</h1>
@@ -800,69 +805,69 @@
         <div class="skills-container">
           <!-- C++ -->
           <div class="skill-logo cpp-logo">
-            <img src="/image/logos/cpp_logo.png" alt="C++" class="static-logo">
+            <img src="image/logos/cpp_logo.png" alt="C++" class="static-logo">
             <span>C++</span>
           </div>
           <!-- CSS -->
           <div class="skill-logo css-logo">
-            <img src="/image/logos/css_logo.png" alt="CSS3" class="static-logo">
+            <img src="image/logos/css_logo.png" alt="CSS3" class="static-logo">
             <!-- <img src="image/logos/css_gif.gif" alt="CSS3" class="animated-logo"> -->
             <span>CSS3</span>
           </div>
           <!-- Express.js -->
           <div class="skill-logo express-logo">
-            <img src="/image/logos/express.js_logo.png" alt="Express.js" class="static-logo">
+            <img src="image/logos/express.js_logo.png" alt="Express.js" class="static-logo">
             <span>Express.js</span>
           </div>
           <!-- Git -->
           <div class="skill-logo">
-            <img src="/image/logos/git_logo.png" alt="Git" class="static-logo">
-            <img src="/image/logos/git_gif.gif" alt="Git" class="animated-logo">
+            <img src="image/logos/git_logo.png" alt="Git" class="static-logo">
+            <img src="image/logos/git_gif.gif" alt="Git" class="animated-logo">
             <span>Git</span>
           </div>
           <!-- HTML -->
           <div class="skill-logo html-logo">
-            <img src="/image/logos/html_logo.png" alt="HTML5" class="static-logo">
-            <img src="/image/logos/html_gif.gif" alt="HTML5" class="animated-logo">
+            <img src="image/logos/html_logo.png" alt="HTML5" class="static-logo">
+            <img src="image/logos/html_gif.gif" alt="HTML5" class="animated-logo">
             <span>HTML5</span>
           </div>
           <!-- JavaScript -->
           <div class="skill-logo">
-            <img src="/image/logos/javascript_logo.png" alt="JavaScript" class="static-logo">
-            <img src="/image/logos/javascript_gif.gif" alt="JavaScript" class="animated-logo">
+            <img src="image/logos/javascript_logo.png" alt="JavaScript" class="static-logo">
+            <img src="image/logos/javascript_gif.gif" alt="JavaScript" class="animated-logo">
             <span>JavaScript</span>
           </div>
           <!-- Linux -->
           <div class="skill-logo linux-logo">
-            <img src="/image/logos/linux_logo.png" alt="Linux" class="static-logo">
+            <img src="image/logos/linux_logo.png" alt="Linux" class="static-logo">
             <span>Linux</span>
           </div>
           <!-- MongoDB -->
           <div class="skill-logo rotate-logo">
-            <img src="/image/logos/mongodb_logo.png" alt="MongoDB" class="static-logo">
+            <img src="image/logos/mongodb_logo.png" alt="MongoDB" class="static-logo">
             <span>MongoDB</span>
           </div>
           <!-- Node.js -->
           <div class="skill-logo node-logo">
-            <img src="/image/logos/node.js_logo.png" alt="Node.js" class="static-logo">
-            <img src="/image/logos/node.js_gif.gif" alt="Node.js" class="animated-logo">
+            <img src="image/logos/node.js_logo.png" alt="Node.js" class="static-logo">
+            <img src="image/logos/node.js_gif.gif" alt="Node.js" class="animated-logo">
             <span>Node.js</span>
           </div>
           <!-- PHP -->
           <div class="skill-logo php-logo">
-            <img src="/image/logos/php_logo.png" alt="PHP" class="static-logo">
+            <img src="image/logos/php_logo.png" alt="PHP" class="static-logo">
             <span>PHP</span>
           </div>
           <!-- Python -->
           <div class="skill-logo">
-            <img src="/image/logos/python_logo.png" alt="Python" class="static-logo">
-            <img src="/image/logos/python_gif.gif" alt="Python" class="animated-logo">
+            <img src="image/logos/python_logo.png" alt="Python" class="static-logo">
+            <img src="image/logos/python_gif.gif" alt="Python" class="animated-logo">
             <span>Python</span>
           </div>
           <!-- React -->
           <div class="skill-logo react-logo">
-            <img src="/image/logos/react_logo.png" alt="React" class="static-logo">
-            <img src="/image/logos/react_gif.gif" alt="React" class="animated-logo">
+            <img src="image/logos/react_logo.png" alt="React" class="static-logo">
+            <img src="image/logos/react_gif.gif" alt="React" class="animated-logo">
             <span>React</span>
           </div>
         </div>
@@ -874,7 +879,7 @@
       <div class="project-item">
         <div class="project-image" onclick="window.open('https://pokemon-site-nine.vercel.app', '_blank')">
           <div class="preview-container">
-            <img src="/image/dark_theme_pokedex.png" alt="Pokemon Site Preview">
+            <img src="image/dark_theme_pokedex.png" alt="Pokemon Site Preview">
           </div>
           <h3>Pokédex Site</h3>
         </div>
