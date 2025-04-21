@@ -725,6 +725,11 @@
       opacity: 1;
       transform: translateX(0);
     }
+    .project-image:hover {
+      border-color: rgba(132, 94, 194, 0.8);
+      box-shadow: 0 0 20px rgba(132, 94, 194, 0.4);
+      transform: translateX(50px) scale(1.02);
+    }
     .preview-container {
       width: 100%;
       aspect-ratio: 16/9;
@@ -751,11 +756,13 @@
       color: #ffffff;
       margin-bottom: 15px;
       font-size: 1.5rem;
+      text-shadow: 0 0 10px rgba(132, 94, 194, 0.6);
     }
     .project-content p {
       color: #cccccc;
       margin-bottom: 20px;
       line-height: 1.7;
+      text-shadow: 0 0 8px rgba(132, 94, 194, 0.4);
     }
     .project-links {
       display: flex;
@@ -1134,6 +1141,98 @@
         opacity: 0;
       }
     }
+
+    /* UFO Styles */
+    .ufo-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .ufo {
+      position: absolute;
+      width: 40px;
+      height: 20px;
+      background: linear-gradient(180deg, #333 0%, #666 100%);
+      border-radius: 20px 20px 5px 5px;
+      box-shadow: 0 0 15px rgba(120, 220, 255, 0.5);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .ufo::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -100%);
+      width: 24px;
+      height: 12px;
+      background: rgba(120, 220, 255, 0.8);
+      border-radius: 12px 12px 0 0;
+    }
+
+    .ufo::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30px;
+      height: 4px;
+      background: rgba(120, 220, 255, 0.3);
+      border-radius: 2px;
+      animation: ufoGlow 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes ufoGlow {
+      from {
+        opacity: 0.3;
+        box-shadow: 0 0 5px rgba(120, 220, 255, 0.3);
+      }
+      to {
+        opacity: 0.8;
+        box-shadow: 0 0 15px rgba(120, 220, 255, 0.8);
+      }
+    }
+
+    @keyframes moveUfoFromLeft {
+      0% { transform: translate(-50px, 0); opacity: 1; }
+      25% { transform: translate(25vw, 25vh); opacity: 1; }
+      50% { transform: translate(50vw, 0); opacity: 1; }
+      75% { transform: translate(75vw, 25vh); opacity: 1; }
+      100% { transform: translate(calc(100vw + 50px), 0); opacity: 1; }
+    }
+
+    @keyframes moveUfoFromRight {
+      0% { transform: translate(calc(100vw + 50px), 0); opacity: 1; }
+      25% { transform: translate(75vw, 25vh); opacity: 1; }
+      50% { transform: translate(50vw, 0); opacity: 1; }
+      75% { transform: translate(25vw, 25vh); opacity: 1; }
+      100% { transform: translate(-50px, 0); opacity: 1; }
+    }
+
+    @keyframes moveUfoFromTop {
+      0% { transform: translate(0, -50px); opacity: 1; }
+      25% { transform: translate(25vw, 25vh); opacity: 1; }
+      50% { transform: translate(0, 50vh); opacity: 1; }
+      75% { transform: translate(-25vw, 75vh); opacity: 1; }
+      100% { transform: translate(0, calc(100vh + 50px)); opacity: 1; }
+    }
+
+    @keyframes moveUfoFromBottom {
+      0% { transform: translate(0, calc(100vh + 50px)); opacity: 1; }
+      25% { transform: translate(-25vw, 75vh); opacity: 1; }
+      50% { transform: translate(0, 50vh); opacity: 1; }
+      75% { transform: translate(25vw, 25vh); opacity: 1; }
+      100% { transform: translate(0, -50px); opacity: 1; }
+    }
   </style>
 </head>
 <body>
@@ -1141,6 +1240,7 @@
   <button class="cursor-toggle" id="cursorToggle" aria-label="Toggle custom cursor">Toggle Custom Cursor</button>
   <div id="particles-js"></div>
   <div class="meteor-shower"></div>
+  <div class="ufo-container"></div>
 
   <section class="hero-section" id="hero">
     <div id="header-particles"></div>
@@ -1942,6 +2042,79 @@
       }
       
       startMeteorShower();
+    });
+
+    // Replace the UFO JavaScript code
+    document.addEventListener('DOMContentLoaded', () => {
+      // Existing code...
+
+      // UFO effect
+      const ufoContainer = document.querySelector('.ufo-container');
+      let isUfo1Active = false;
+      let isUfo2Active = false;
+
+      function createUfo(ufoNumber) {
+        if ((ufoNumber === 1 && isUfo1Active) || (ufoNumber === 2 && isUfo2Active)) return;
+        
+        if (ufoNumber === 1) isUfo1Active = true;
+        else isUfo2Active = true;
+
+        const ufo = document.createElement('div');
+        ufo.className = 'ufo';
+        
+        // Random entry point
+        const entryPoint = Math.floor(Math.random() * 4);
+        let animation = '';
+        
+        switch(entryPoint) {
+          case 0: // Left
+            ufo.style.left = '-50px';
+            ufo.style.top = '100px';
+            animation = 'moveUfoFromLeft 15s linear forwards';
+            break;
+          case 1: // Right
+            ufo.style.left = 'calc(100vw + 50px)';
+            ufo.style.top = '100px';
+            animation = 'moveUfoFromRight 15s linear forwards';
+            break;
+          case 2: // Top
+            ufo.style.left = '50vw';
+            ufo.style.top = '-50px';
+            animation = 'moveUfoFromTop 15s linear forwards';
+            break;
+          case 3: // Bottom
+            ufo.style.left = '50vw';
+            ufo.style.top = 'calc(100vh + 50px)';
+            animation = 'moveUfoFromBottom 15s linear forwards';
+            break;
+        }
+        
+        ufoContainer.appendChild(ufo);
+
+        // Start UFO animation
+        requestAnimationFrame(() => {
+          ufo.style.opacity = '1';
+          ufo.style.animation = animation;
+        });
+
+        // Cleanup after animation
+        setTimeout(() => {
+          ufo.remove();
+          if (ufoNumber === 1) isUfo1Active = false;
+          else isUfo2Active = false;
+        }, 15000);
+      }
+
+      // Create UFOs at different intervals
+      // UFO 1: Every 8 seconds
+      setInterval(() => createUfo(1), 8000);
+      
+      // UFO 2: Every 5 seconds
+      setInterval(() => createUfo(2), 5000);
+      
+      // Create first UFOs after different delays
+      setTimeout(() => createUfo(1), 1000);
+      setTimeout(() => createUfo(2), 2000);
     });
   </script>
 </body>
