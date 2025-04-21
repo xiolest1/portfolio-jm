@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Joan Morillo's Portfolio - Full-stack developer specializing in modern web applications. Explore my projects in React, Node.js, and more. View my technical skills and get in touch for collaboration opportunities.">
   <title>Joan Morillo | Portfolio</title>
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -10,11 +11,12 @@
     /* Reset & Base Styles */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
-    /* Hide default cursor */
-    *, *:hover, *:active, *:focus {
+    /* Remove global cursor hiding */
+    /* *, *:hover, *:active, *:focus {
       cursor: none !important;
-    }
+    } */
 
+    /* Custom cursor styles */
     .custom-cursor {
       width: 24px;
       height: 24px;
@@ -24,7 +26,45 @@
       position: fixed;
       pointer-events: none;
       z-index: 99999;
-      /* Since pointer is at top-left, no transform needed */
+      display: none; /* Hidden by default */
+    }
+
+    /* Hide default cursor when custom cursor is enabled */
+    body.custom-cursor-enabled * {
+      cursor: none !important;
+    }
+
+    /* Show default cursor when custom cursor is disabled */
+    body:not(.custom-cursor-enabled) * {
+      cursor: auto !important;
+    }
+
+    /* Ensure toggle button always shows pointer cursor */
+    .cursor-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(20, 20, 20, 0.8);
+      color: #ffffff;
+      border: 1px solid #333;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      cursor: pointer !important;
+      z-index: 1000;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(5px);
+      display: none; /* Hidden by default */
+    }
+
+    .cursor-toggle:hover {
+      background: rgba(30, 30, 30, 0.9);
+      border-color: rgb(255, 77, 90);
+    }
+
+    .cursor-toggle:focus {
+      outline: 2px solid rgb(255, 77, 90);
+      outline-offset: 2px;
     }
 
     body { 
@@ -789,6 +829,7 @@
 </head>
 <body>
   <div class="custom-cursor"></div>
+  <button class="cursor-toggle" id="cursorToggle" aria-label="Toggle custom cursor">Toggle Custom Cursor</button>
   <div id="particles-js"></div>
 
   <section class="hero-section" id="hero">
@@ -990,13 +1031,85 @@
   </div>
 
   <script>
-    // Simple cursor movement
+    // Update cursor implementation
     document.addEventListener('DOMContentLoaded', () => {
       const cursor = document.querySelector('.custom-cursor');
-      document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      });
+      const cursorToggle = document.getElementById('cursorToggle');
+      let isCustomCursorEnabled = true;
+
+      // Check if device is mobile
+      const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+      // Only show cursor and toggle button on desktop
+      if (!isMobile) {
+        cursorToggle.style.display = 'block';
+        
+        // Function to toggle custom cursor
+        function toggleCustomCursor() {
+          isCustomCursorEnabled = !isCustomCursorEnabled;
+          
+          if (isCustomCursorEnabled) {
+            // Enable custom cursor
+            document.body.classList.add('custom-cursor-enabled');
+            cursor.style.display = 'block';
+            cursorToggle.textContent = 'Disable Custom Cursor';
+          } else {
+            // Disable custom cursor
+            document.body.classList.remove('custom-cursor-enabled');
+            cursor.style.display = 'none';
+            cursorToggle.textContent = 'Enable Custom Cursor';
+          }
+          
+          // Store preference in localStorage
+          localStorage.setItem('customCursorEnabled', isCustomCursorEnabled);
+        }
+
+        // Initialize cursor state
+        const savedPreference = localStorage.getItem('customCursorEnabled');
+        
+        if (savedPreference === null) {
+          // First time visitor - enable custom cursor
+          document.body.classList.add('custom-cursor-enabled');
+          cursor.style.display = 'block';
+          cursorToggle.textContent = 'Disable Custom Cursor';
+          localStorage.setItem('customCursorEnabled', 'true');
+        } else if (savedPreference === 'true') {
+          // Returning visitor who enabled custom cursor
+          document.body.classList.add('custom-cursor-enabled');
+          cursor.style.display = 'block';
+          cursorToggle.textContent = 'Disable Custom Cursor';
+        } else {
+          // Returning visitor who disabled custom cursor
+          document.body.classList.remove('custom-cursor-enabled');
+          cursor.style.display = 'none';
+          cursorToggle.textContent = 'Enable Custom Cursor';
+        }
+
+        // Add click handler for toggle button
+        cursorToggle.addEventListener('click', toggleCustomCursor);
+
+        // Update cursor position only when enabled
+        document.addEventListener('mousemove', (e) => {
+          if (isCustomCursorEnabled) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+          }
+        });
+
+        // Hide custom cursor when mouse leaves window
+        document.addEventListener('mouseleave', () => {
+          if (isCustomCursorEnabled) {
+            cursor.style.display = 'none';
+          }
+        });
+
+        // Show custom cursor when mouse enters window
+        document.addEventListener('mouseenter', () => {
+          if (isCustomCursorEnabled) {
+            cursor.style.display = 'block';
+          }
+        });
+      }
     });
 
     // Sticky Navigation
