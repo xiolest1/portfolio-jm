@@ -116,7 +116,7 @@
       text-align: center;
       max-width: 800px;
       padding: 0 20px;
-      pointer-events: auto;
+      pointer-events: none;
     }
 
     .profile-picture {
@@ -130,6 +130,7 @@
       opacity: 0;
       transform: translateX(100px);
       transition: all 2s ease-out;
+      pointer-events: none;
     }
 
     .profile-picture.animate {
@@ -141,6 +142,7 @@
       opacity: 0;
       transform: translateX(-100px);
       transition: all 2s ease-out;
+      pointer-events: none;
     }
 
     .hero-text.animate {
