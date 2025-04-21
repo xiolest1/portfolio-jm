@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /assets/
-Disallow: /css/
-Disallow: /js/
 
-Sitemap: https://your-portfolio-url.vercel.app/sitemap.xml 
+# Block access to admin pages
+Disallow: /admin/
+
+Sitemap: https://portfolio-jm-rouge.vercel.app/sitemap.xml 
