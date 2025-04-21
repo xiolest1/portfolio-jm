@@ -1098,12 +1098,49 @@
     .project-image {
       cursor: pointer;
     }
+
+    /* Add meteor shower styles */
+    .meteor-shower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .meteor {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+      animation: meteor linear infinite;
+      transform: rotate(-45deg);
+      pointer-events: none;
+    }
+
+    @keyframes meteor {
+      0% {
+        transform: translate(calc(var(--startX) * 1px), calc(var(--startY) * 1px)) rotate(-45deg) scale(1);
+        opacity: 1;
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        transform: translate(calc(var(--endX) * 1px), calc(var(--endY) * 1px)) rotate(-45deg) scale(0.2);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="custom-cursor"></div>
   <button class="cursor-toggle" id="cursorToggle" aria-label="Toggle custom cursor">Toggle Custom Cursor</button>
   <div id="particles-js"></div>
+  <div class="meteor-shower"></div>
 
   <section class="hero-section" id="hero">
     <div id="header-particles"></div>
@@ -1851,6 +1888,60 @@
           }, 100);
         }
       }
+    });
+
+    // Add this to your existing script section at the bottom
+    document.addEventListener('DOMContentLoaded', () => {
+      // Existing code...
+
+      // Meteor shower effect
+      const meteorShower = document.querySelector('.meteor-shower');
+      
+      function createMeteor() {
+        const meteor = document.createElement('div');
+        meteor.className = 'meteor';
+        
+        // Random starting position above and to the left of the viewport
+        const startX = Math.random() * window.innerWidth - 200;
+        const startY = -100;
+        
+        // Random ending position below and to the right
+        const endX = startX + 500 + Math.random() * 300;
+        const endY = startY + 500 + Math.random() * 300;
+        
+        // Set custom properties for the animation
+        meteor.style.setProperty('--startX', startX);
+        meteor.style.setProperty('--startY', startY);
+        meteor.style.setProperty('--endX', endX);
+        meteor.style.setProperty('--endY', endY);
+        
+        // Random size
+        const size = 1 + Math.random() * 2;
+        meteor.style.width = size + 'px';
+        meteor.style.height = size * 15 + 'px';
+        
+        // Random duration between 1 and 3 seconds
+        const duration = 1000 + Math.random() * 2000;
+        meteor.style.animation = `meteor ${duration}ms linear forwards`;
+        
+        meteorShower.appendChild(meteor);
+        
+        // Remove meteor after animation
+        setTimeout(() => {
+          meteor.remove();
+        }, duration);
+      }
+      
+      // Create meteors at random intervals
+      function startMeteorShower() {
+        setInterval(() => {
+          if (Math.random() < 0.45) { // Increased from 0.3 to 0.45 (45% chance)
+            createMeteor();
+          }
+        }, 400); // Reduced from 500ms to 400ms for more frequent checks
+      }
+      
+      startMeteorShower();
     });
   </script>
 </body>
