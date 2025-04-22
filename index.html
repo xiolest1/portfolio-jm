@@ -473,6 +473,8 @@
       padding: 20px;
       width: 100%;
       margin: 0 auto;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .skill-logo {
@@ -667,13 +669,13 @@
     /* Mobile Responsive Design */
     @media (max-width: 1200px) {
       .skills-container {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
 
     @media (max-width: 768px) {
       .skills-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
         gap: 15px;
         padding: 15px;
       }
@@ -685,23 +687,71 @@
 
       .skill-logo span {
         margin-top: 65px;
+        font-size: 0.9rem;
+      }
+
+      /* Adjust logo sizes for mobile */
+      .skill-logo .static-logo,
+      .skill-logo .animated-logo {
+        width: 50px;
+        height: 50px;
+      }
+
+      .skill-logo.html-logo .animated-logo {
+        width: 65px;
+        height: 65px;
+      }
+
+      .skill-logo.node-logo .animated-logo,
+      .skill-logo.react-logo .animated-logo {
+        width: 55px;
+        height: 55px;
+      }
+
+      .skill-logo.css-logo .static-logo {
+        width: 45px;
+        height: 45px;
       }
     }
 
     @media (max-width: 480px) {
       .skills-container {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 15px;
-        padding: 15px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 10px;
       }
 
       .skill-logo {
-        min-height: 110px;
-        padding: 15px;
+        min-height: 100px;
+        padding: 10px;
       }
 
       .skill-logo span {
-        margin-top: 60px;
+        margin-top: 55px;
+        font-size: 0.8rem;
+      }
+
+      /* Further adjust logo sizes for very small screens */
+      .skill-logo .static-logo,
+      .skill-logo .animated-logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      .skill-logo.html-logo .animated-logo {
+        width: 55px;
+        height: 55px;
+      }
+
+      .skill-logo.node-logo .animated-logo,
+      .skill-logo.react-logo .animated-logo {
+        width: 45px;
+        height: 45px;
+      }
+
+      .skill-logo.css-logo .static-logo {
+        width: 35px;
+        height: 35px;
       }
     }
 
