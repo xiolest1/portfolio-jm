@@ -442,13 +442,6 @@
       position: relative;
     }
 
-    /* Add vertical scroll hint animation */
-    @keyframes scrollHintVertical {
-      0% { transform: translateY(0); }
-      75% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-
     .about-paragraphs {
       max-height: 300px;
       overflow-y: auto;
@@ -459,22 +452,57 @@
       padding-bottom: 30px;
     }
 
-    .about-content::after {
-      content: '↓';
-      position: absolute;
-      right: 0;
-      bottom: -45px;
-      font-size: 40px;
-      color: rgba(132, 94, 194, 0.8);
-      animation: scrollHintVertical 1.5s infinite;
-      pointer-events: none;
-      opacity: 0.8;
-      z-index: 2;
-    }
+    /* Move scroll hint animations to mobile media query */
 
-    /* Hide vertical scroll hint when at the end of scroll */
-    .about-paragraphs::-webkit-scrollbar-thumb:active ~ .about-content::after {
-      display: none;
+    @media (max-width: 768px) {
+      /* Add scroll hint animations */
+      @keyframes scrollHint {
+        0% { transform: translateX(0); }
+        75% { transform: translateX(-10px); }
+        100% { transform: translateX(0); }
+      }
+
+      @keyframes scrollHintVertical {
+        0% { transform: translateY(0); }
+        75% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+      }
+
+      .about-content::after {
+        content: '↓';
+        position: absolute;
+        right: 0;
+        bottom: -45px;
+        font-size: 28px;
+        color: rgba(132, 94, 194, 0.8);
+        animation: scrollHintVertical 1.5s infinite;
+        pointer-events: none;
+        opacity: 0.8;
+        z-index: 2;
+      }
+
+      /* Hide vertical scroll hint when at the end of scroll */
+      .about-paragraphs::-webkit-scrollbar-thumb:active ~ .about-content::after {
+        display: none;
+      }
+
+      .skills-section::after {
+        content: '→';
+        position: absolute;
+        right: 20px;
+        bottom: 0px;
+        font-size: 28px;
+        color: rgba(132, 94, 194, 0.8);
+        animation: scrollHint 1.5s infinite;
+        pointer-events: none;
+        opacity: 0.8;
+        z-index: 2;
+      }
+
+      /* Hide horizontal scroll hint when at the end of scroll */
+      .skills-container::-webkit-scrollbar-thumb:active ~ .skills-section::after {
+        display: none;
+      }
     }
 
     .about-content.animate {
@@ -824,7 +852,7 @@
         position: absolute;
         right: 20px;
         bottom: 0px;
-        font-size: 40px; /* Increased from 18px */
+        font-size: 28px; /* Increased from 18px */
         color: rgba(132, 94, 194, 0.8);
         animation: scrollHint 1.5s infinite;
         pointer-events: none;
