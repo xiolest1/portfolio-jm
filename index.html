@@ -447,16 +447,64 @@
     }
 
     .about-content h2 {
-      font-size: 2.5rem;
       color: #ffffff;
       margin-bottom: 30px;
+      font-size: 2.5rem;
+    }
+
+    .about-paragraphs {
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 20px;
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(132, 94, 194, 0.5) rgba(20, 20, 20, 0.1);
+    }
+
+    /* Webkit scrollbar styles */
+    .about-paragraphs::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .about-paragraphs::-webkit-scrollbar-track {
+      background: rgba(20, 20, 20, 0.1);
+      border-radius: 3px;
+    }
+
+    .about-paragraphs::-webkit-scrollbar-thumb {
+      background: rgba(132, 94, 194, 0.5);
+      border-radius: 3px;
+      transition: background 0.3s ease;
+    }
+
+    .about-paragraphs::-webkit-scrollbar-thumb:hover {
+      background: rgba(132, 94, 194, 0.8);
     }
 
     .about-content p {
-      font-size: 1.2rem;
       color: #cccccc;
-      line-height: 1.8;
       margin-bottom: 20px;
+      line-height: 1.7;
+      text-shadow: 0 0 8px rgba(132, 94, 194, 0.4);
+      text-align: left;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      right: 0;
+      bottom: 20px;
+      width: 6px;
+      height: 50px;
+      background: rgba(132, 94, 194, 0.3);
+      border-radius: 3px;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .about-paragraphs:hover + .scroll-indicator {
+      opacity: 1;
     }
 
     /* Skills Section */
@@ -1664,8 +1712,13 @@
     <section class="about-section" id="about">
       <div class="about-content">
         <h2>About Me</h2>
-        <p>I am a passionate full-stack developer with a keen interest in building modern web applications. My journey in software development started with a curiosity for creating interactive experiences and has evolved into a professional pursuit of crafting efficient, scalable solutions.</p>
-        <p>With expertise in both front-end and back-end technologies, I strive to create applications that not only function flawlessly but also provide an exceptional user experience. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.</p>
+        <div class="about-paragraphs">
+          <p>I am a passionate full-stack developer with a keen interest in building modern web applications. My journey in software development started with a curiosity for creating interactive experiences and has evolved into a professional pursuit of crafting efficient, scalable solutions.</p>
+          <p>With expertise in both front-end and back-end technologies, I strive to create applications that not only function flawlessly but also provide an exceptional user experience. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.</p>
+          <p>My approach to development combines creativity with technical precision. I believe in writing clean, maintainable code and implementing best practices to ensure long-term sustainability of projects. Whether it's crafting responsive user interfaces or optimizing backend performance, I enjoy tackling challenges that push my boundaries.</p>
+          <p>Beyond coding, I'm deeply interested in user experience design and accessibility. I believe that great software should be both powerful and inclusive, accessible to users of all abilities. This philosophy guides my development process, from initial concept to final implementation.</p>
+          <p>I'm always excited to collaborate on innovative projects and contribute to the developer community. When I'm not coding, you can find me exploring new technologies, participating in hackathons, or sharing knowledge with fellow developers.</p>
+        </div>
       </div>
       
       <div class="skills-section">
@@ -1760,9 +1813,33 @@
             <span>HTML</span>
             <span>CSS</span>
             <span>Javascript</span>
+            <span>API</span>
           </div>
         </div>
       </div>
+
+      <div class="project-item">
+        <div class="project-content">
+          <h3>Portfolio Site</h3>
+          <p>A modern and interactive portfolio website featuring particle effects, custom animations, and responsive design. Built with a focus on user experience and simplicity with a uniqueness of visuals.</p>
+          <div class="project-links">
+            <a href="https://joanmorillo.com" target="_blank">Live Demo</a>
+            <a href="https://github.com/xiolest1/portfolio-jm" class="github" target="_blank">View Project</a>
+          </div>
+        </div>
+        <div class="project-image" onclick="window.open('https://joanmorillo.com', '_blank')">
+          <div class="preview-container">
+            <img src="image/portfolio_preview.png" alt="Portfolio Site Preview">
+          </div>
+          <h3>Portfolio Site</h3>
+          <div class="tech-stack">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+          </div>
+        </div>
+      </div>
+
       <div class="project-item">
         <div class="project-content">
           <h3>3D-Printed Robot Gripper</h3>
