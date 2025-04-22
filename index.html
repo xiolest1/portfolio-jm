@@ -1787,6 +1787,66 @@
 
     @keyframes antena_d { 50% {transform: rotate(20deg);} }
     @keyframes antena_e { 50% {transform: rotate(-20deg);} }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        padding-top: 80px; /* Add padding to account for fixed nav */
+        min-height: 100vh; /* Ensure full height on mobile */
+        height: auto; /* Allow content to determine height */
+      }
+
+      .profile-picture {
+        margin-top: 20px; /* Add some space from the top */
+      }
+
+      .hero-content {
+        padding: 20px;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+        margin-top: 20px;
+      }
+
+      /* Adjust nav menu positioning */
+      .nav-menu {
+        height: 60px;
+      }
+
+      .nav-menu ul {
+        top: 60px;
+      }
+
+      /* Ensure content starts below fixed nav */
+      .main-content {
+        padding-top: 60px;
+      }
+
+      /* Adjust social links spacing */
+      .hero-text .social-links {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-section {
+        padding-top: 60px;
+      }
+
+      .profile-picture {
+        width: 150px;
+        height: 150px;
+      }
+
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
