@@ -739,6 +739,7 @@
       .skills-section {
         width: 100%;
         overflow: hidden;
+        position: relative;
       }
 
       .skills-section h3 {
@@ -756,6 +757,7 @@
         gap: 15px;
         margin: 0 -20px;
         padding-left: 20px;
+        padding-bottom: 30px; /* Increased padding for arrow */
         scroll-behavior: smooth;
       }
 
@@ -772,6 +774,31 @@
 
       .skills-container::-webkit-scrollbar-thumb:hover {
         background-color: rgba(132, 94, 194, 0.8);
+      }
+
+      /* Add scroll hint animation */
+      @keyframes scrollHint {
+        0% { transform: translateX(0); }
+        75% { transform: translateX(-10px); }
+        100% { transform: translateX(0); }
+      }
+
+      .skills-section::after {
+        content: '→';
+        position: absolute;
+        right: 20px;
+        bottom: 0px;
+        font-size: 40px; /* Increased from 18px */
+        color: rgba(132, 94, 194, 0.8);
+        animation: scrollHint 1.5s infinite;
+        pointer-events: none;
+        opacity: 0.8;
+        z-index: 2;
+      }
+
+      /* Hide scroll hint when at the end of scroll */
+      .skills-container::-webkit-scrollbar-thumb:active ~ .skills-section::after {
+        display: none;
       }
 
       .skill-logo {
