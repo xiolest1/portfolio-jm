@@ -651,14 +651,16 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      opacity: 1;
+      transform: none;
     }
 
-    .skills-section.animate {
-      opacity: 1;
-      transform: translateY(0);
+    .skills-section h3 {
+      color: #ffffff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(132, 94, 194, 0.6);
     }
 
     .skills-container {
@@ -671,6 +673,7 @@
       background: rgba(20, 20, 20, 0.8);
       border-radius: 15px;
       border: 1px solid rgba(132, 94, 194, 0.3);
+      position: relative;
     }
 
     .skill-item {
@@ -686,52 +689,127 @@
       justify-content: center;
       padding: 10px 8px;
       text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.5s ease forwards;
-      animation-play-state: paused;
+      cursor: pointer;
+      min-height: 100px;
+      perspective: 1000px;
     }
 
-    .skill-item.animate {
-      animation-play-state: running;
+    .skill-item .card-front,
+    .skill-item .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      transition: transform 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(30, 30, 30, 0.8);
+      border-radius: 8px;
+      padding: 10px;
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .skill-item .card-front {
+      transform: rotateY(0deg);
     }
 
-    .skill-item:hover {
-      transform: translateY(-5px);
-      border-color: rgba(132, 94, 194, 0.8);
-      box-shadow: 0 5px 15px rgba(132, 94, 194, 0.3);
+    .skill-item .card-back {
+      transform: rotateY(180deg);
+      background: rgba(40, 40, 40, 0.95);
+    }
+
+    .skill-item:hover .card-front {
+      transform: rotateY(180deg);
+    }
+
+    .skill-item:hover .card-back {
+      transform: rotateY(360deg);
     }
 
     .skill-logo {
-      font-size: 1.8rem;
+      font-size: 2rem;
       color: #ffffff;
       margin-bottom: 8px;
       transition: all 0.3s ease;
-      height: auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: pulse 2s infinite;
     }
 
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-      100% { transform: scale(1); }
+    .skill-name {
+      color: #ffffff;
+      font-size: 0.9rem;
+      margin-top: 5px;
     }
 
-    /* Mobile view adjustments */
+    .skill-details {
+      font-size: 0.8rem;
+      color: #fff;
+      text-align: center;
+      padding: 5px;
+    }
+
+    .skill-details .experience {
+      margin-bottom: 5px;
+      color: rgba(132, 94, 194, 0.9);
+      font-weight: bold;
+    }
+
+    .skill-details .description {
+      font-size: 0.75rem;
+      color: #ccc;
+      line-height: 1.3;
+    }
+
+    /* Particle effects */
+    .skill-item::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+                                rgba(132, 94, 194, 0.15), 
+                                transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: 8px;
+      z-index: 1;
+    }
+
+    .skill-item:hover::before {
+      opacity: 1;
+    }
+
+    /* Glowing outline effect */
+    .skill-item::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(45deg, 
+                                rgba(132, 94, 194, 0.5), 
+                                rgba(255, 77, 90, 0.5), 
+                                rgba(132, 94, 194, 0.5));
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+      filter: blur(8px);
+    }
+
+    .skill-item:hover::after {
+      opacity: 1;
+    }
+
+    /* C++ Logo specific style */
+    .cpp-logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    /* Mobile Experience Improvements */
     @media (max-width: 768px) {
       .skills-container {
         display: flex;
@@ -741,26 +819,6 @@
         -webkit-overflow-scrolling: touch;
         padding: 15px;
         gap: 15px;
-        grid-template-columns: none;
-      }
-
-      .skills-container::-webkit-scrollbar {
-        height: 8px;
-      }
-
-      .skills-container::-webkit-scrollbar-track {
-        background: rgba(20, 20, 20, 0.1);
-        border-radius: 4px;
-      }
-
-      .skills-container::-webkit-scrollbar-thumb {
-        background: rgba(132, 94, 194, 0.5);
-        border-radius: 4px;
-        transition: background 0.3s ease;
-      }
-
-      .skills-container::-webkit-scrollbar-thumb:hover {
-        background: rgba(132, 94, 194, 0.8);
       }
 
       .skill-item {
@@ -768,32 +826,34 @@
         width: 120px;
         height: 120px;
         scroll-snap-align: center;
-        margin-right: 5px;
       }
 
-      /* Add scroll hint animation */
-      .skills-container::after {
-        content: '→';
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 24px;
-        color: rgba(132, 94, 194, 0.8);
-        animation: scrollHint 1.5s infinite;
-        pointer-events: none;
-        opacity: 0.8;
+      .skill-logo {
+        font-size: 1.8rem;
       }
 
-      @keyframes scrollHint {
-        0% { transform: translate(0, -50%); }
-        50% { transform: translate(10px, -50%); }
-        100% { transform: translate(0, -50%); }
+      .skill-name {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .skills-container {
+        padding: 10px;
+        gap: 10px;
       }
 
-      /* Hide scroll hint when user has scrolled */
-      .skills-container.scrolled::after {
-        display: none;
+      .skill-item {
+        width: 100px;
+        height: 100px;
+      }
+
+      .skill-logo {
+        font-size: 1.5rem;
+      }
+
+      .skill-name {
+        font-size: 0.8rem;
       }
     }
 
@@ -1927,82 +1987,147 @@
         <h3>Technical Skills</h3>
         <div class="skills-container">
           <div class="skill-item">
-            <i class="fab fa-html5 skill-logo"></i>
-            <span class="skill-name">HTML5</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 90%"></div>
+            <div class="card-front">
+              <i class="fab fa-html5 skill-logo"></i>
+              <span class="skill-name">HTML5</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">2+ Years</div>
+                <div class="description">Semantic markup, accessibility, SEO best practices</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-css3-alt skill-logo"></i>
-            <span class="skill-name">CSS3</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 85%"></div>
+            <div class="card-front">
+              <i class="fab fa-css3-alt skill-logo"></i>
+              <span class="skill-name">CSS3</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">2+ Years</div>
+                <div class="description">Flexbox, Grid, Animations, Responsive Design</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-js-square skill-logo"></i>
-            <span class="skill-name">JavaScript</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 80%"></div>
+            <div class="card-front">
+              <i class="fab fa-js-square skill-logo"></i>
+              <span class="skill-name">JavaScript</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">1+ Years</div>
+                <div class="description">ES6+, DOM manipulation, Async/Await</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-react skill-logo"></i>
-            <span class="skill-name">React</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 75%"></div>
+            <div class="card-front">
+              <i class="fab fa-react skill-logo"></i>
+              <span class="skill-name">React</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">1+ Years</div>
+                <div class="description">Hooks, Context, Redux, Next.js</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-node skill-logo"></i>
-            <span class="skill-name">Node.js</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 80%"></div>
+            <div class="card-front">
+              <i class="fab fa-node skill-logo"></i>
+              <span class="skill-name">Node.js</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">1+ Years</div>
+                <div class="description">Express, REST APIs, Authentication</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-node-js skill-logo"></i>
-            <span class="skill-name">Express.js</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 75%"></div>
+            <div class="card-front">
+              <i class="fab fa-node-js skill-logo"></i>
+              <span class="skill-name">Express.js</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">1+ Years</div>
+                <div class="description">Middleware, Routing, MVC pattern</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fas fa-database skill-logo"></i>
-            <span class="skill-name">MongoDB</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 70%"></div>
+            <div class="card-front">
+              <i class="fas fa-database skill-logo"></i>
+              <span class="skill-name">MongoDB</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">1+ Years</div>
+                <div class="description">Schema design, Aggregation, Indexing</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-python skill-logo"></i>
-            <span class="skill-name">Python</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 85%"></div>
+            <div class="card-front">
+              <i class="fab fa-python skill-logo"></i>
+              <span class="skill-name">Python</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">2+ Years</div>
+                <div class="description">Data analysis, Automation, Web Scraping</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <div class="skill-logo">
-              <span class="cpp-logo">C++</span>
+            <div class="card-front">
+              <div class="skill-logo">
+                <span class="cpp-logo">C++</span>
+              </div>
+              <span class="skill-name">C++</span>
             </div>
-            <span class="skill-name">C++</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 75%"></div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">2+ Years</div>
+                <div class="description">OOP, Data Structures, Algorithms</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-git-alt skill-logo"></i>
-            <span class="skill-name">Git</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 80%"></div>
+            <div class="card-front">
+              <i class="fab fa-git-alt skill-logo"></i>
+              <span class="skill-name">Git</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">1+ Years</div>
+                <div class="description">Version control, Branching, CI/CD</div>
+              </div>
             </div>
           </div>
+          
           <div class="skill-item">
-            <i class="fab fa-linux skill-logo"></i>
-            <span class="skill-name">Linux</span>
-            <div class="proficiency-bar">
-              <div class="proficiency-level" style="width: 70%"></div>
+            <div class="card-front">
+              <i class="fab fa-linux skill-logo"></i>
+              <span class="skill-name">Linux</span>
+            </div>
+            <div class="card-back">
+              <div class="skill-details">
+                <div class="experience">1+ Years</div>
+                <div class="description">Shell scripting, System administration</div>
+              </div>
             </div>
           </div>
         </div>
@@ -2961,6 +3086,70 @@
             isScrolled = true;
             skillsContainer.classList.add('scrolled');
           }
+        });
+      }
+    });
+
+    // Add this to your script section
+    document.addEventListener('DOMContentLoaded', () => {
+      // Track mouse position for particle effects
+      document.addEventListener('mousemove', (e) => {
+        const skillItems = document.querySelectorAll('.skill-item');
+        skillItems.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          item.style.setProperty('--mouse-x', `${x}%`);
+          item.style.setProperty('--mouse-y', `${y}%`);
+        });
+      });
+
+      // Mobile carousel functionality
+      const skillsContainer = document.querySelector('.skills-container');
+      const skillItems = document.querySelectorAll('.skill-item');
+      
+      if (window.innerWidth <= 768) {
+        // Create carousel dots
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'carousel-dots';
+        const numDots = Math.ceil(skillItems.length / 3); // Assuming 3 items visible at once
+        
+        for (let i = 0; i < numDots; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', () => {
+            const scrollPos = i * skillsContainer.offsetWidth;
+            skillsContainer.scrollTo({
+              left: scrollPos,
+              behavior: 'smooth'
+            });
+          });
+          dotsContainer.appendChild(dot);
+        }
+        
+        skillsContainer.parentNode.insertBefore(dotsContainer, skillsContainer.nextSibling);
+
+        // Update dots on scroll
+        skillsContainer.addEventListener('scroll', () => {
+          const scrollPos = skillsContainer.scrollLeft;
+          const activeIndex = Math.round(scrollPos / skillsContainer.offsetWidth);
+          document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === activeIndex);
+          });
+        });
+
+        // Add parallax effect
+        let lastScrollLeft = 0;
+        skillsContainer.addEventListener('scroll', () => {
+          const scrollDiff = skillsContainer.scrollLeft - lastScrollLeft;
+          lastScrollLeft = skillsContainer.scrollLeft;
+
+          skillItems.forEach(item => {
+            const rect = item.getBoundingClientRect();
+            const centerOffset = (rect.left + rect.width / 2) - (window.innerWidth / 2);
+            const parallaxValue = centerOffset * 0.1;
+            item.style.transform = `translateX(${-parallaxValue}px)`;
+          });
         });
       }
     });
