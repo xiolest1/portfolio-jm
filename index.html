@@ -176,6 +176,7 @@
       pointer-events: none;
     }
 
+    /* Profile Picture Shine Effect */
     .profile-picture {
       width: 180px;
       height: 180px;
@@ -188,6 +189,49 @@
       transform: translateX(100px);
       transition: all 2s ease-out;
       pointer-events: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-picture::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        transparent 40%,
+        rgba(132, 94, 194, 0.4) 45%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(132, 94, 194, 0.4) 55%,
+        transparent 60%,
+        transparent
+      );
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes shine {
+      0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+      }
+      100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+      }
+    }
+
+    .profile-picture img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 0;
     }
 
     .profile-picture.animate {
@@ -218,39 +262,54 @@
     .hero-text .social-link {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       color: #ffffff;
       text-decoration: none;
-      transition: all 0.2s ease;
-      padding: 10px 20px;
+      transition: all 0.3s ease;
+      padding: 12px 24px;
       background: rgba(20, 20, 20, 0.8);
-      border-radius: 8px;
+      border-radius: 50px;
       border: 1px solid rgba(132, 94, 194, 0.3);
       backdrop-filter: blur(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(0);
     }
 
     .hero-text .social-link:hover,
     .hero-text .social-link:focus {
-      color: rgb(255, 77, 90);
-      border-color: rgb(255, 77, 90);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 77, 90, 0.2);
+      color: #ffffff;
+      border-color: rgba(132, 94, 194, 0.8);
+      background: rgba(132, 94, 194, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(132, 94, 194, 0.3);
     }
 
     .hero-text .social-link i {
-      font-size: 24px;
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .hero-text .social-link:hover i {
+      transform: scale(1.1);
     }
 
     .hero-text .social-link span {
       font-size: 1rem;
       font-weight: 500;
+      letter-spacing: 0.5px;
     }
 
-    .profile-picture img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
+    @media (max-width: 768px) {
+      .hero-text .social-links {
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+      }
+
+      .hero-text .social-link {
+        width: 200px;
+        justify-content: center;
+      }
     }
 
     .hero-content h1 {
@@ -1972,6 +2031,202 @@
         padding-right: 40px; /* Add space for the arrow */
       }
     }
+
+    // Header particles configuration (cosmic theme)
+    particlesJS('header-particles', {
+      particles: {
+        number: {
+          value: 100,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: ['#845ec2', '#2c698d', '#272727', '#b0413e']
+        },
+        shape: {
+          type: ['circle', 'star'],
+          stroke: {
+            width: 0,
+            color: '#000000'
+          },
+          polygon: {
+            nb_sides: 5
+          },
+          star: {
+            nb_sides: 5,
+            inner_radius: 0.5,
+            outer_radius: 1
+          }
+        },
+        opacity: {
+          value: 0.6,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 0.3,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#845ec2',
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.8,
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: true,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'grab'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 200,
+            line_linked: {
+              opacity: 0.4
+            }
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
+
+    // Background particles configuration (cosmic theme)
+    particlesJS('particles-js', {
+      particles: {
+        number: {
+          value: 100,
+          density: {
+            enable: true,
+            value_area: 800
+          }
+        },
+        color: {
+          value: ['#845ec2', '#2c698d', '#272727', '#b0413e']
+        },
+        shape: {
+          type: ['circle', 'star'],
+          stroke: {
+            width: 0,
+            color: '#000000'
+          },
+          polygon: {
+            nb_sides: 5
+          },
+          star: {
+            nb_sides: 5,
+            inner_radius: 0.5,
+            outer_radius: 1
+          }
+        },
+        opacity: {
+          value: 0.6,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 0.3,
+            opacity_min: 0.1,
+            sync: false
+          }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false
+          }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#845ec2',
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 0.8,
+          direction: 'none',
+          random: true,
+          straight: false,
+          out_mode: 'out',
+          bounce: false,
+          attract: {
+            enable: true,
+            rotateX: 600,
+            rotateY: 1200
+          }
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: {
+            enable: true,
+            mode: 'grab'
+          },
+          onclick: {
+            enable: true,
+            mode: 'push'
+          },
+          resize: true
+        },
+        modes: {
+          grab: {
+            distance: 200,
+            line_linked: {
+              opacity: 0.4
+            }
+          },
+          push: {
+            particles_nb: 4
+          }
+        }
+      },
+      retina_detect: true
+    });
   </style>
 </head>
 <body>
@@ -2377,6 +2632,104 @@
 
       createStars();
 
+      // Initialize particles with cosmic theme
+      particlesJS('header-particles', {
+        particles: {
+          number: {
+            value: 100,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: ['#845ec2', '#2c698d', '#272727', '#b0413e']
+          },
+          shape: {
+            type: ['circle', 'star'],
+            stroke: {
+              width: 0,
+              color: '#000000'
+            },
+            polygon: {
+              nb_sides: 5
+            },
+            star: {
+              nb_sides: 5,
+              inner_radius: 0.5,
+              outer_radius: 1
+            }
+          },
+          opacity: {
+            value: 0.6,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 0.3,
+              opacity_min: 0.1,
+              sync: false
+            }
+          },
+          size: {
+            value: 3,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 2,
+              size_min: 0.1,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#845ec2',
+            opacity: 0.2,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 0.8,
+            direction: 'none',
+            random: true,
+            straight: false,
+            out_mode: 'out',
+            bounce: false,
+            attract: {
+              enable: true,
+              rotateX: 600,
+              rotateY: 1200
+            }
+          }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: {
+              enable: true,
+              mode: 'grab'
+            },
+            onclick: {
+              enable: true,
+              mode: 'push'
+            },
+            resize: true
+          },
+          modes: {
+            grab: {
+              distance: 200,
+              line_linked: {
+                opacity: 0.4
+              }
+            },
+            push: {
+              particles_nb: 4
+            }
+          }
+        },
+        retina_detect: true
+      });
+
       // Eye movement effect
       document.addEventListener('mousemove', (e) => {
         if (eyes) {
@@ -2497,49 +2850,78 @@
       window.addEventListener('scroll', handleScroll);
     });
 
-    // Header particles configuration (red)
+    // Header particles configuration (cosmic theme)
     particlesJS('header-particles', {
       particles: {
         number: {
-          value: 80,
+          value: 100,
           density: {
             enable: true,
-            value_area: 800  // Increased from 550 to 800 for better coverage
+            value_area: 800
           }
         },
         color: {
-          value: '#ff4d5a'
+          value: ['#845ec2', '#2c698d', '#272727', '#b0413e']
         },
         shape: {
-          type: 'circle'
+          type: ['circle', 'star'],
+          stroke: {
+            width: 0,
+            color: '#000000'
+          },
+          polygon: {
+            nb_sides: 5
+          },
+          star: {
+            nb_sides: 5,
+            inner_radius: 0.5,
+            outer_radius: 1
+          }
         },
         opacity: {
-          value: 0.5,
-          random: false
+          value: 0.6,
+          random: true,
+          anim: {
+            enable: true,
+            speed: 0.3,
+            opacity_min: 0.1,
+            sync: false
+          }
         },
         size: {
           value: 3,
-          random: true
+          random: true,
+          anim: {
+            enable: true,
+            speed: 2,
+            size_min: 0.1,
+            sync: false
+          }
         },
         line_linked: {
           enable: true,
-          distance: 150,  // Increased from 140 to 200
-          color: '#ff4d5a',
-          opacity: 0.4,
+          distance: 150,
+          color: '#845ec2',
+          opacity: 0.2,
           width: 1
         },
         move: {
           enable: true,
-          speed: 0.6,
+          speed: 0.8,
           direction: 'none',
-          random: false,
+          random: true,
           straight: false,
           out_mode: 'out',
-          bounce: false
+          bounce: false,
+          attract: {
+            enable: true,
+            rotateX: 600,
+            rotateY: 1200
+          }
         }
       },
       interactivity: {
-        detect_on: 'parent',  // Changed from 'canvas' to 'parent'
+        detect_on: 'canvas',
         events: {
           onhover: {
             enable: true,
@@ -2553,9 +2935,9 @@
         },
         modes: {
           grab: {
-            distance: 200,  // Increased from 140 to 200
+            distance: 200,
             line_linked: {
-              opacity: 1
+              opacity: 0.4
             }
           },
           push: {
