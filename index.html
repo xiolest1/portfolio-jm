@@ -2081,11 +2081,7 @@
           }
         },
         line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#845ec2',
-          opacity: 0.2,
-          width: 1
+          enable: false
         },
         move: {
           enable: true,
@@ -2179,11 +2175,7 @@
           }
         },
         line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#845ec2',
-          opacity: 0.2,
-          width: 1
+          enable: false
         },
         move: {
           enable: true,
@@ -2473,7 +2465,7 @@
       <div class="project-item">
         <div class="project-content">
           <h3>Pokédex Site</h3>
-          <p>A modern web application built with React and Node.js, featuring real-time updates and responsive design.</p>
+          <p>A responsive Pokédex web app using JavaScript, CSS3, and HTML5 that integrates with PokeAPI to display 898+ Pokémons, implementing dynamic UI animations, responsive mobile/desktop views, stat visualization and evolution chains.</p>
           <div class="project-links">
             <a href="https://pokemon-site-nine.vercel.app" target="_blank">Live Demo</a>
             <a href="https://github.com/xiolest1/pokemon-site" class="github" target="_blank">View Project</a>
@@ -2681,11 +2673,7 @@
             }
           },
           line_linked: {
-            enable: true,
-            distance: 150,
-            color: '#845ec2',
-            opacity: 0.2,
-            width: 1
+            enable: false
           },
           move: {
             enable: true,
@@ -2899,11 +2887,7 @@
           }
         },
         line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#845ec2',
-          opacity: 0.2,
-          width: 1
+          enable: false
         },
         move: {
           enable: true,
@@ -2948,7 +2932,7 @@
       retina_detect: true
     });
 
-    // Background particles configuration (space theme)
+    // Background particles configuration (cosmic theme)
     particlesJS('particles-js', {
       particles: {
         number: {
@@ -2959,17 +2943,29 @@
           }
         },
         color: {
-          value: ['#845ec2', '#296073', '#3596b5', '#adc5cf'] // Updated color palette
+          value: ['#845ec2', '#2c698d', '#272727', '#b0413e']
         },
         shape: {
-          type: 'circle'
+          type: ['circle', 'star'],
+          stroke: {
+            width: 0,
+            color: '#000000'
+          },
+          polygon: {
+            nb_sides: 5
+          },
+          star: {
+            nb_sides: 5,
+            inner_radius: 0.5,
+            outer_radius: 1
+          }
         },
         opacity: {
-          value: 0.5,
+          value: 0.6,
           random: true,
           anim: {
             enable: true,
-            speed: 0.5, // Reduced from 1 to 0.5 for slower changes
+            speed: 0.3,
             opacity_min: 0.1,
             sync: false
           }
@@ -2979,7 +2975,7 @@
           random: true,
           anim: {
             enable: true,
-            speed: 1, // Reduced from 2 to 1 for slower changes
+            speed: 2,
             size_min: 0.1,
             sync: false
           }
@@ -2989,7 +2985,7 @@
         },
         move: {
           enable: true,
-          speed: 0.5, // Reduced from 0.75 to 0.5 for slower movement
+          speed: 0.8,
           direction: 'none',
           random: true,
           straight: false,
@@ -3007,7 +3003,7 @@
         events: {
           onhover: {
             enable: true,
-            mode: 'bubble'
+            mode: 'grab'
           },
           onclick: {
             enable: true,
@@ -3016,12 +3012,11 @@
           resize: true
         },
         modes: {
-          bubble: {
+          grab: {
             distance: 200,
-            size: 4,
-            duration: 2,
-            opacity: 0.8,
-            speed: 3
+            line_linked: {
+              opacity: 0.4
+            }
           },
           push: {
             particles_nb: 4
