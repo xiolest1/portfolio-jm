@@ -2035,7 +2035,7 @@
     // Header particles configuration (cosmic theme)
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
-    particlesJS('header-particles', {
+    const particleConfig = {
       particles: {
         number: {
           value: 100,
@@ -2083,7 +2083,11 @@
           }
         },
         line_linked: {
-          enable: !isTouchDevice
+          enable: !isTouchDevice,
+          distance: 150,
+          color: '#845ec2',
+          opacity: 0.2,
+          width: 1
         },
         move: {
           enable: true,
@@ -2105,19 +2109,19 @@
         events: {
           onhover: {
             enable: !isTouchDevice,
-            mode: 'grab'
+            mode: isTouchDevice ? 'none' : 'grab'
           },
           onclick: {
             enable: true,
-            mode: 'push'
+            mode: isTouchDevice ? 'push' : 'push'
           },
           resize: true
         },
         modes: {
           grab: {
-            distance: 200,
+            distance: isTouchDevice ? 0 : 200,
             line_linked: {
-              opacity: 0.4
+              opacity: isTouchDevice ? 0 : 0.4
             }
           },
           push: {
@@ -2126,101 +2130,13 @@
         }
       },
       retina_detect: true
-    });
+    };
 
-    // Background particles configuration (cosmic theme)
-    particlesJS('particles-js', {
-      particles: {
-        number: {
-          value: 100,
-          density: {
-            enable: true,
-            value_area: 800
-          }
-        },
-        color: {
-          value: ['#845ec2', '#2c698d', '#272727', '#b0413e']
-        },
-        shape: {
-          type: ['circle', 'star'],
-          stroke: {
-            width: 0,
-            color: '#000000'
-          },
-          polygon: {
-            nb_sides: 5
-          },
-          star: {
-            nb_sides: 5,
-            inner_radius: 0.5,
-            outer_radius: 1
-          }
-        },
-        opacity: {
-          value: 0.6,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 0.3,
-            opacity_min: 0.1,
-            sync: false
-          }
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: {
-            enable: true,
-            speed: 2,
-            size_min: 0.1,
-            sync: false
-          }
-        },
-        line_linked: {
-          enable: !isTouchDevice
-        },
-        move: {
-          enable: true,
-          speed: 0.8,
-          direction: 'none',
-          random: true,
-          straight: false,
-          out_mode: 'out',
-          bounce: false,
-          attract: {
-            enable: true,
-            rotateX: 600,
-            rotateY: 1200
-          }
-        }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: {
-            enable: !isTouchDevice,
-            mode: 'grab'
-          },
-          onclick: {
-            enable: true,
-            mode: 'push'
-          },
-          resize: true
-        },
-        modes: {
-          grab: {
-            distance: 200,
-            line_linked: {
-              opacity: 0.4
-            }
-          },
-          push: {
-            particles_nb: 4
-          }
-        }
-      },
-      retina_detect: true
-    });
+    // Initialize header particles
+    particlesJS('header-particles', particleConfig);
+
+    // Initialize background particles with the same config
+    particlesJS('particles-js', particleConfig);
   </style>
 </head>
 <body>
