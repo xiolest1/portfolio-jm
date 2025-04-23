@@ -651,14 +651,14 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .skills-section h3 {
-      color: #ffffff;
-      font-size: 2rem;
-      margin-bottom: 20px;
-      text-align: center;
-      text-shadow: 0 0 10px rgba(132, 94, 194, 0.6);
+    .skills-section.animate {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .skills-container {
@@ -686,6 +686,31 @@
       justify-content: center;
       padding: 10px 8px;
       text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s ease forwards;
+      animation-play-state: paused;
+    }
+
+    .skill-item.animate {
+      animation-play-state: running;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(132, 94, 194, 0.8);
+      box-shadow: 0 5px 15px rgba(132, 94, 194, 0.3);
     }
 
     .skill-logo {
@@ -697,6 +722,79 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Mobile view adjustments */
+    @media (max-width: 768px) {
+      .skills-container {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding: 15px;
+        gap: 15px;
+        grid-template-columns: none;
+      }
+
+      .skills-container::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .skills-container::-webkit-scrollbar-track {
+        background: rgba(20, 20, 20, 0.1);
+        border-radius: 4px;
+      }
+
+      .skills-container::-webkit-scrollbar-thumb {
+        background: rgba(132, 94, 194, 0.5);
+        border-radius: 4px;
+        transition: background 0.3s ease;
+      }
+
+      .skills-container::-webkit-scrollbar-thumb:hover {
+        background: rgba(132, 94, 194, 0.8);
+      }
+
+      .skill-item {
+        flex: 0 0 auto;
+        width: 120px;
+        height: 120px;
+        scroll-snap-align: center;
+        margin-right: 5px;
+      }
+
+      /* Add scroll hint animation */
+      .skills-container::after {
+        content: '→';
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        color: rgba(132, 94, 194, 0.8);
+        animation: scrollHint 1.5s infinite;
+        pointer-events: none;
+        opacity: 0.8;
+      }
+
+      @keyframes scrollHint {
+        0% { transform: translate(0, -50%); }
+        50% { transform: translate(10px, -50%); }
+        100% { transform: translate(0, -50%); }
+      }
+
+      /* Hide scroll hint when user has scrolled */
+      .skills-container.scrolled::after {
+        display: none;
+      }
     }
 
     .skill-name {
@@ -2221,7 +2319,7 @@
         },
         line_linked: {
           enable: true,
-          distance: 150,
+          distance: 150,  // Increased from 140 to 200
           color: '#ff4d5a',
           opacity: 0.4,
           width: 1
@@ -2828,6 +2926,43 @@
         
         lastScrollY = currentScrollY;
       });
+    });
+
+    // Add this to your script section
+    document.addEventListener('DOMContentLoaded', () => {
+      // Existing observers...
+
+      // Skills section animation
+      const skillsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            // Animate each skill item with delay
+            const skillItems = entry.target.querySelectorAll('.skill-item');
+            skillItems.forEach((item, index) => {
+              item.style.animationDelay = `${index * 100}ms`;
+              item.classList.add('animate');
+            });
+          }
+        });
+      }, { threshold: 0.2 });
+
+      const skillsSection = document.querySelector('.skills-section');
+      if (skillsSection) {
+        skillsObserver.observe(skillsSection);
+      }
+
+      // Handle scroll hint for mobile
+      const skillsContainer = document.querySelector('.skills-container');
+      if (skillsContainer) {
+        let isScrolled = false;
+        skillsContainer.addEventListener('scroll', () => {
+          if (!isScrolled && skillsContainer.scrollLeft > 0) {
+            isScrolled = true;
+            skillsContainer.classList.add('scrolled');
+          }
+        });
+      }
     });
   </script>
 </body>
