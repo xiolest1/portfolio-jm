@@ -503,22 +503,77 @@
         display: none;
       }
 
+      /* Remove the skills section arrow */
       .skills-section::after {
-        content: '→';
-        position: absolute;
-        right: 20px;
-        bottom: 0px;
-        font-size: 28px;
-        color: rgba(132, 94, 194, 0.8);
-        animation: scrollHint 1.5s infinite;
-        pointer-events: none;
-        opacity: 0.8;
-        z-index: 2;
+        display: none;
       }
 
-      /* Hide horizontal scroll hint when at the end of scroll */
-      .skills-container::-webkit-scrollbar-thumb:active ~ .skills-section::after {
-        display: none;
+      /* Mobile view adjustments for skills section */
+      .skills-section {
+        padding: 0 10px;
+      }
+
+      .skills-container {
+        padding: 15px;
+        gap: 10px;
+        max-width: 100%;
+      }
+
+      .skill-item {
+        width: 85px;
+        height: 85px;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: visible;
+      }
+
+      .skill-logo {
+        width: 35px;
+        height: 35px;
+        margin-bottom: 8px;
+        display: block;
+        object-fit: contain;
+        max-width: 100%;
+      }
+
+      .skill-name {
+        font-size: 0.8rem;
+        text-align: center;
+        white-space: nowrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .skills-section h3 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .skills-container {
+        padding: 10px;
+        gap: 8px;
+      }
+
+      .skill-item {
+        width: 75px;
+        height: 75px;
+        padding: 8px;
+        overflow: visible;
+      }
+
+      .skill-logo {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 6px;
+        min-height: unset;
+      }
+
+      .skill-name {
+        font-size: 0.75rem;
+        white-space: nowrap;
       }
     }
 
@@ -588,338 +643,158 @@
       opacity: 1;
     }
 
-    /* Skills Section */
+    /* Skills Section - Compact Layout */
     .skills-section {
-      flex: 1;
-      padding: 0 20px;
       width: 100%;
+      padding: 20px;
+      margin-bottom: 30px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .skills-section h3 {
+      color: #ffffff;
+      font-size: 2rem;
+      margin-bottom: 20px;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(132, 94, 194, 0.6);
     }
 
     .skills-container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      padding: 20px;
+      gap: 12px;
       width: 100%;
       margin: 0 auto;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      padding: 15px;
+      background: rgba(20, 20, 20, 0.8);
+      border-radius: 15px;
+      border: 1px solid rgba(132, 94, 194, 0.3);
     }
 
-    .skill-logo {
+    .skill-item {
       position: relative;
-      min-height: 135px;
-      width: 100%;
-      background: linear-gradient(135deg, rgba(132, 94, 194, 0.1), rgba(53, 150, 181, 0.1));
-      border: 2px solid rgba(132, 94, 194, 0.3);
-      border-radius: 12px;
-      padding: 20px;
+      background: rgba(30, 30, 30, 0.8);
+      border-radius: 8px;
+      border: 1px solid transparent;
+      transition: all 0.3s ease;
+      aspect-ratio: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 1.5s ease-out;
-    }
-
-    .skill-logo.animate {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Base styles for all logos (static and animated) */
-    .skill-logo .static-logo,
-    .skill-logo .animated-logo {
-      position: absolute;
-      top: 25px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 63px;  /* Decreased from 70px by 10% */
-      height: 63px; /* Decreased from 70px by 10% */
-      object-fit: contain;
-    }
-
-    .skill-logo span {
-      position: relative;
-      display: block;
-      margin-top: 75px;
-      color: #ffffff;
-      font-size: 1.1rem;
+      padding: 10px 8px;
       text-align: center;
-      padding: 0 10px;
     }
 
-    /* Show all GIFs by default */
-    .skill-logo .animated-logo {
-      opacity: 1;
+    .skill-logo {
+      font-size: 1.8rem;
+      color: #ffffff;
+      margin-bottom: 8px;
+      transition: all 0.3s ease;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* Hide static images for logos with GIFs */
-    .skill-logo:has(.animated-logo) .static-logo {
-      display: none;
+    .skill-name {
+      color: #999;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      position: absolute;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
     }
 
-    /* Larger sizes for specific GIF logos */
-    .skill-logo.html-logo .animated-logo {
-      width: 85.5px;  /* Decreased from 95px by 10% */
-      height: 85.5px; /* Decreased from 95px by 10% */
-      top: 15px;
+    /* Update About Me section */
+    .about-content {
+      flex: 1;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 3s ease-out;
+      position: relative;
     }
 
-    .skill-logo.node-logo .animated-logo,
-    .skill-logo.react-logo .animated-logo {
-      width: 72px;  /* Decreased from 80px by 10% */
-      height: 72px; /* Decreased from 80px by 10% */
-      top: 20px;
+    .about-paragraphs {
+      max-height: 400px;
+      overflow-y: auto;
+      padding-right: 20px;
+      position: relative;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(132, 94, 194, 0.5) rgba(20, 20, 20, 0.1);
+      padding-bottom: 30px;
+      text-align: left;
     }
 
-    /* Static Logo Animations */
-    /* HTML5 Animation */
-    @keyframes floatRotate {
-      0%, 100% { 
-        transform: translateX(-50%) translateY(0) rotate(0deg);
-      }
-      50% { 
-        transform: translateX(-50%) translateY(-15px) rotate(5deg);
-      }
-    }
-    .skill-logo.html-logo .static-logo {
-      animation: floatRotate 3s ease-in-out infinite;
-      display: block !important;
-    }
+    /* Rest of the styles remain the same until media queries */
 
-    /* JavaScript Animation */
-    @keyframes pulseGlow {
-      0%, 100% { 
-        transform: translateX(-50%) scale(1);
-        filter: drop-shadow(0 0 0 rgba(247, 223, 30, 0));
-      }
-      50% { 
-        transform: translateX(-50%) scale(1.1);
-        filter: drop-shadow(0 0 10px rgba(247, 223, 30, 0.5));
-      }
-    }
-    .skill-logo.javascript-logo .static-logo {
-      animation: pulseGlow 2s ease-in-out infinite;
-      display: block !important;
-    }
-
-    /* C++ Animation */
-    @keyframes flip3D {
-      0% { transform: translateX(-50%) rotateY(0deg); }
-      100% { transform: translateX(-50%) rotateY(360deg); }
-    }
-    .skill-logo.cpp-logo .static-logo {
-      animation: flip3D 2s linear infinite;
-      display: block !important;
-    }
-
-    /* CSS Float Animation */
-    @keyframes float {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, -15px); }
-    }
-    .skill-logo.css-logo .static-logo {
-      width: 54px;  /* Decreased from 60px by 10% */
-      height: 54px; /* Decreased from 60px by 10% */
-      animation: float 3s ease-in-out infinite;
-      display: block !important;
-    }
-
-    /* Express.js Animation */
-    @keyframes wave {
-      0%, 100% { transform: translateX(-50%) rotate(0deg); }
-      25% { transform: translateX(-50%) rotate(15deg); }
-      75% { transform: translateX(-50%) rotate(-15deg); }
-    }
-    .skill-logo.express-logo .static-logo {
-      animation: wave 1.5s ease infinite;
-      display: block !important;
-    }
-
-    /* MongoDB Animation */
-    @keyframes rotate {
-      0% { transform: translateX(-50%) rotate(0deg); }
-      100% { transform: translateX(-50%) rotate(360deg); }
-    }
-    .skill-logo.rotate-logo .static-logo {
-      animation: rotate 2s linear infinite;
-      display: block !important;
-    }
-
-    /* PHP Animation */
-    @keyframes bounceRotate {
-      0%, 100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-      50% { transform: translateX(-50%) translateY(-15px) rotate(180deg); }
-    }
-    .skill-logo.php-logo .static-logo {
-      animation: bounceRotate 1.5s ease infinite;
-      display: block !important;
-    }
-
-    /* Linux Animation */
-    @keyframes linuxPulse {
-      0%, 100% { 
-        transform: translateX(-50%) scale(1) rotate(0deg);
-        filter: brightness(1) hue-rotate(0deg);
-      }
-      50% { 
-        transform: translateX(-50%) scale(1.15) rotate(-180deg);
-        filter: brightness(1.2) hue-rotate(-180deg);
-      }
-    }
-    .skill-logo.linux-logo .static-logo {
-      animation: linuxPulse 3s ease-in-out infinite;
-      display: block !important;
-    }
-
-    /* Larger sizes for specific static logos */
-    .skill-logo.html-logo .static-logo {
-      width: 54px;  /* Decreased from 60px by 10% */
-      height: 54px; /* Decreased from 60px by 10% */
-      top: 25px;
-    }
-
-    .skill-logo.javascript-logo .static-logo {
-      width: 54px;  /* Decreased from 60px by 10% */
-      height: 54px; /* Decreased from 60px by 10% */
-      top: 25px;
-    }
-
-    .skill-logo.node-logo .animated-logo,
-    .skill-logo.react-logo .animated-logo {
-      width: 72px;  /* Decreased from 80px by 10% */
-      height: 72px; /* Decreased from 80px by 10% */
-      top: 20px;
-    }
-
-    /* Mobile Responsive Design */
-    @media (max-width: 1200px) {
+    /* Medium screens */
+    @media (max-width: 1199px) {
       .skills-container {
         grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 12px;
+      }
+
+      .skill-item {
+        padding: 8px 6px;
+      }
+
+      .skill-logo {
+        font-size: 1.6rem;
+        margin-bottom: 6px;
+      }
+
+      .skill-name {
+        font-size: 0.75rem;
+        bottom: 8px;
       }
     }
 
+    /* Tablet */
     @media (max-width: 768px) {
-      .about-section {
-        flex-direction: column;
-        padding: 50px 20px;
-        gap: 30px;
-      }
-
-      .about-content {
-        max-width: 100%;
-      }
-
-      .about-paragraphs {
-        max-height: 250px;
-      }
-
       .skills-section {
-        width: 100%;
-        overflow: hidden;
-        position: relative;
+        padding: 15px;
       }
 
       .skills-section h3 {
-        margin-bottom: 20px;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
       }
 
       .skills-container {
-        display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        padding: 10px 5px 20px;
-        gap: 15px;
-        margin: 0 -20px;
-        padding-left: 20px;
-        padding-bottom: 30px; /* Increased padding for arrow */
-        scroll-behavior: smooth;
-      }
-
-      /* Custom scrollbar for horizontal skills */
-      .skills-container::-webkit-scrollbar {
-        height: 6px;
-        background-color: rgba(20, 20, 20, 0.1);
-      }
-
-      .skills-container::-webkit-scrollbar-thumb {
-        background-color: rgba(132, 94, 194, 0.5);
-        border-radius: 3px;
-      }
-
-      .skills-container::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(132, 94, 194, 0.8);
-      }
-
-      /* Add scroll hint animation */
-      @keyframes scrollHint {
-        0% { transform: translateX(0); }
-        75% { transform: translateX(-10px); }
-        100% { transform: translateX(0); }
-      }
-
-      .skills-section::after {
-        content: '→';
-        position: absolute;
-        right: 20px;
-        bottom: 0px;
-        font-size: 28px; /* Increased from 18px */
-        color: rgba(132, 94, 194, 0.8);
-        animation: scrollHint 1.5s infinite;
-        pointer-events: none;
-        opacity: 0.8;
-        z-index: 2;
-      }
-
-      /* Hide scroll hint when at the end of scroll */
-      .skills-container::-webkit-scrollbar-thumb:active ~ .skills-section::after {
-        display: none;
-      }
-
-      .skill-logo {
-        flex: 0 0 auto;
-        width: 150px;
-        min-height: 120px;
-        scroll-snap-align: start;
-        margin-bottom: 0;
-      }
-
-      .skill-logo span {
-        margin-top: 65px;
-        font-size: 0.9rem;
-      }
-
-      /* Adjust logo sizes */
-      .skill-logo .static-logo,
-      .skill-logo .animated-logo {
-        width: 45px;
-        height: 45px;
-        top: 20px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 10px;
       }
     }
 
+    /* Mobile */
     @media (max-width: 480px) {
-      .about-section {
-        padding: 30px 15px;
+      .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        padding: 10px;
       }
 
-      .about-paragraphs {
-        max-height: 200px;
+      .skill-item {
+        padding: 8px 6px;
       }
 
       .skill-logo {
-        width: 130px;
-        min-height: 110px;
+        font-size: 1.4rem;
+        margin-bottom: 5px;
       }
 
-      .skill-logo span {
-        font-size: 0.8rem;
+      .skill-name {
+        font-size: 0.7rem;
+        bottom: 6px;
       }
     }
 
@@ -1935,80 +1810,102 @@
         <h2>About Me</h2>
         <div class="about-paragraphs">
           <p>I am a passionate full-stack developer with a keen interest in building modern web applications. My journey in software development started with a curiosity for creating interactive experiences and has evolved into a professional pursuit of crafting efficient, scalable solutions.</p>
+          
           <p>With expertise in both front-end and back-end technologies, I strive to create applications that not only function flawlessly but also provide an exceptional user experience. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.</p>
+          
           <p>My approach to development combines creativity with technical precision. I believe in writing clean, maintainable code and implementing best practices to ensure long-term sustainability of projects. Whether it's crafting responsive user interfaces or optimizing backend performance, I enjoy tackling challenges that push my boundaries.</p>
+          
           <p>Beyond coding, I'm deeply interested in user experience design and accessibility. I believe that great software should be both powerful and inclusive, accessible to users of all abilities. This philosophy guides my development process, from initial concept to final implementation.</p>
-          <p>I'm always excited to collaborate on innovative projects and contribute to the developer community. When I'm not coding, you can find me exploring new technologies, participating in hackathons, or sharing knowledge with fellow developers.</p>
+          
+          <p>In my projects, I focus on creating intuitive interfaces that enhance user engagement while maintaining robust backend systems that ensure reliability and performance. I have experience working with modern frameworks and tools, allowing me to build scalable applications that meet current industry standards.</p>
+
+          <p>I'm particularly passionate about optimizing application performance and implementing efficient algorithms. My background in both frontend and backend development allows me to approach problems holistically, considering both user experience and system architecture in my solutions.</p>
+
+          <p>When I'm not coding, I enjoy contributing to open-source projects and staying updated with the latest technological trends. I believe in the power of community-driven development and regularly participate in tech meetups and online forums to share knowledge and learn from others.</p>
         </div>
       </div>
       
       <div class="skills-section">
         <h3>Technical Skills</h3>
         <div class="skills-container">
-          <!-- C++ -->
-          <div class="skill-logo cpp-logo">
-            <img src="image/logos/cpp_logo.png" alt="C++" class="static-logo">
-            <span>C++</span>
+          <div class="skill-item">
+            <i class="fab fa-html5 skill-logo"></i>
+            <span class="skill-name">HTML5</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 90%"></div>
+            </div>
           </div>
-          <!-- CSS -->
-          <div class="skill-logo css-logo">
-            <img src="image/logos/css_logo.png" alt="CSS3" class="static-logo">
-            <!-- <img src="image/logos/css_gif.gif" alt="CSS3" class="animated-logo"> -->
-            <span>CSS3</span>
+          <div class="skill-item">
+            <i class="fab fa-css3-alt skill-logo"></i>
+            <span class="skill-name">CSS3</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 85%"></div>
+            </div>
           </div>
-          <!-- Express.js -->
-          <div class="skill-logo express-logo">
-            <img src="image/logos/express.js_logo.png" alt="Express.js" class="static-logo">
-            <span>Express.js</span>
+          <div class="skill-item">
+            <i class="fab fa-js-square skill-logo"></i>
+            <span class="skill-name">JavaScript</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 80%"></div>
+            </div>
           </div>
-          <!-- Git -->
-          <div class="skill-logo">
-            <img src="image/logos/git_logo.png" alt="Git" class="static-logo">
-            <img src="image/logos/git_gif.gif" alt="Git" class="animated-logo">
-            <span>Git</span>
+          <div class="skill-item">
+            <i class="fab fa-react skill-logo"></i>
+            <span class="skill-name">React</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 75%"></div>
+            </div>
           </div>
-          <!-- HTML -->
-          <div class="skill-logo html-logo">
-            <img src="image/logos/html_logo.png" alt="HTML5" class="static-logo">
-            <span>HTML5</span>
+          <div class="skill-item">
+            <i class="fab fa-node skill-logo"></i>
+            <span class="skill-name">Node.js</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 80%"></div>
+            </div>
           </div>
-          <!-- JavaScript -->
-          <div class="skill-logo javascript-logo">
-            <img src="image/logos/javascript_logo_svg.svg" alt="JavaScript" class="static-logo">
-            <span>JavaScript</span>
+          <div class="skill-item">
+            <i class="fab fa-node-js skill-logo"></i>
+            <span class="skill-name">Express.js</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 75%"></div>
+            </div>
           </div>
-          <!-- Linux -->
-          <div class="skill-logo linux-logo">
-            <img src="image/logos/linux_logo.png" alt="Linux" class="static-logo">
-            <span>Linux</span>
+          <div class="skill-item">
+            <i class="fas fa-database skill-logo"></i>
+            <span class="skill-name">MongoDB</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 70%"></div>
+            </div>
           </div>
-          <!-- MongoDB -->
-          <div class="skill-logo rotate-logo">
-            <img src="image/logos/mongodb_logo.png" alt="MongoDB" class="static-logo">
-            <span>MongoDB</span>
+          <div class="skill-item">
+            <i class="fab fa-python skill-logo"></i>
+            <span class="skill-name">Python</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 85%"></div>
+            </div>
           </div>
-          <!-- Node.js -->
-          <div class="skill-logo node-logo">
-            <img src="image/logos/node.js_logo.png" alt="Node.js" class="static-logo">
-            <img src="image/logos/node.js_gif.gif" alt="Node.js" class="animated-logo">
-            <span>Node.js</span>
+          <div class="skill-item">
+            <div class="skill-logo">
+              <span class="cpp-logo">C++</span>
+            </div>
+            <span class="skill-name">C++</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 75%"></div>
+            </div>
           </div>
-          <!-- PHP -->
-          <div class="skill-logo php-logo">
-            <img src="image/logos/php_logo.png" alt="PHP" class="static-logo">
-            <span>PHP</span>
+          <div class="skill-item">
+            <i class="fab fa-git-alt skill-logo"></i>
+            <span class="skill-name">Git</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 80%"></div>
+            </div>
           </div>
-          <!-- Python -->
-          <div class="skill-logo">
-            <img src="image/logos/python_logo.png" alt="Python" class="static-logo">
-            <img src="image/logos/python_gif.gif" alt="Python" class="animated-logo">
-            <span>Python</span>
-          </div>
-          <!-- React -->
-          <div class="skill-logo react-logo">
-            <img src="image/logos/react_logo.png" alt="React" class="static-logo">
-            <img src="image/logos/react_gif.gif" alt="React" class="animated-logo">
-            <span>React</span>
+          <div class="skill-item">
+            <i class="fab fa-linux skill-logo"></i>
+            <span class="skill-name">Linux</span>
+            <div class="proficiency-bar">
+              <div class="proficiency-level" style="width: 70%"></div>
+            </div>
           </div>
         </div>
       </div>
