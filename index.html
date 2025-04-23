@@ -2033,6 +2033,8 @@
     }
 
     // Header particles configuration (cosmic theme)
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    
     particlesJS('header-particles', {
       particles: {
         number: {
@@ -2081,7 +2083,7 @@
           }
         },
         line_linked: {
-          enable: false
+          enable: !isTouchDevice
         },
         move: {
           enable: true,
@@ -2102,7 +2104,7 @@
         detect_on: 'canvas',
         events: {
           onhover: {
-            enable: true,
+            enable: !isTouchDevice,
             mode: 'grab'
           },
           onclick: {
@@ -2175,7 +2177,7 @@
           }
         },
         line_linked: {
-          enable: false
+          enable: !isTouchDevice
         },
         move: {
           enable: true,
@@ -2196,7 +2198,7 @@
         detect_on: 'canvas',
         events: {
           onhover: {
-            enable: true,
+            enable: !isTouchDevice,
             mode: 'grab'
           },
           onclick: {
