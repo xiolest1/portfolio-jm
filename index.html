@@ -99,18 +99,29 @@
 
     /* Navigation */
     .nav-menu {
-      width: 100%;
+      position: sticky;
+      top: 0;
       z-index: 1000;
       background: rgba(10, 10, 10, 0.95);
       backdrop-filter: blur(5px);
       border-top: 1px solid #333;
       border-bottom: 1px solid #333;
       padding: 20px 0;
-      position: sticky;
-      top: 0;
+      width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .nav-menu.nav-floating {
+      position: fixed;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transform: translateY(-100%);
+    }
+    
+    .nav-menu.nav-floating.show {
+      transform: translateY(0);
     }
 
     .nav-menu ul {
@@ -3585,34 +3596,29 @@
       });
     });
 
-    // Update the navigation scroll behavior
+    // Navigation scroll behavior - hide when scrolling down, show when scrolling up
     document.addEventListener('DOMContentLoaded', () => {
-      const nav = document.querySelector('nav');
-      const navPosition = nav.offsetTop; // Get initial nav position
+      const navMenu = document.querySelector('.nav-menu');
       let lastScrollY = window.scrollY;
-      let isFloating = false;
+      const scrollThreshold = 100; // Height when navbar should start hiding/showing
 
       window.addEventListener('scroll', () => {
         const currentScrollY = window.scrollY;
         const scrollingUp = currentScrollY < lastScrollY;
         
-        // If we've scrolled past the nav's original position
-        if (currentScrollY > navPosition) {
-          if (!nav.classList.contains('nav-floating')) {
-            nav.classList.add('nav-floating');
-            isFloating = true;
-          }
+        // If we've scrolled past the threshold
+        if (currentScrollY > scrollThreshold) {
+          navMenu.classList.add('nav-floating');
           
           // Show/hide based on scroll direction
           if (scrollingUp) {
-            nav.classList.add('show');
+            navMenu.classList.add('show');
           } else {
-            nav.classList.remove('show');
+            navMenu.classList.remove('show');
           }
         } else {
-          // Reset to original state when scrolled back to original position
-          nav.classList.remove('nav-floating', 'show');
-          isFloating = false;
+          // Reset to original state when scrolled back to top
+          navMenu.classList.remove('nav-floating', 'show');
         }
         
         lastScrollY = currentScrollY;
@@ -3780,6 +3786,58 @@
 
       // Initialize categories
       updateCategories(currentCategory);
+    });
+
+    // Navigation scroll behavior
+    document.addEventListener('DOMContentLoaded', () => {
+      const navMenu = document.querySelector('.nav-menu');
+      let lastScrollY = window.scrollY;
+      let navTop = navMenu.offsetTop; // Get the original position of the nav
+
+      function updateNavigation() {
+        const currentScrollY = window.scrollY;
+        const scrollingDown = currentScrollY > lastScrollY;
+        
+        // Only apply floating behavior on larger viewports
+        if (window.innerWidth > 768) {
+          // If we've scrolled past the nav's original position
+          if (currentScrollY > navTop) {
+            navMenu.classList.add('nav-floating');
+            
+            // Only hide when scrolling down
+            if (scrollingDown) {
+              navMenu.classList.remove('show');
+            } else {
+              navMenu.classList.add('show');
+            }
+          } else {
+            // Reset to original state when scrolled back to top
+            navMenu.classList.remove('nav-floating', 'show');
+          }
+        }
+        
+        lastScrollY = currentScrollY;
+      }
+
+      // Initial check
+      updateNavigation();
+      
+      // Update on scroll with throttling for performance
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            updateNavigation();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+
+      // Update navTop on window resize
+      window.addEventListener('resize', () => {
+        navTop = navMenu.offsetTop;
+      });
     });
   </script>
 </body>
