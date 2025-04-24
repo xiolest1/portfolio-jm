@@ -2028,7 +2028,8 @@
         padding-right: 40px; /* Add space for the arrow */
       }
     }
-
+  </style>
+  <script>
     // Header particles configuration (cosmic theme)
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
@@ -2064,8 +2065,8 @@
           random: true,
           anim: {
             enable: true,
-            speed: 0.3,
-            opacity_min: 0.1,
+            speed: 2,
+            size_min: 0.1,
             sync: false
           }
         },
@@ -2132,7 +2133,35 @@
 
     // Initialize background particles with the same config
     particlesJS('particles-js', particleConfig);
-  </style>
+
+    // Custom cursor functionality
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+
+    const cursorToggle = document.createElement('button');
+    cursorToggle.className = 'cursor-toggle';
+    cursorToggle.textContent = 'Toggle Custom Cursor';
+    document.body.appendChild(cursorToggle);
+
+    let isCustomCursorEnabled = false;
+
+    function updateCursorPosition(e) {
+      if (isCustomCursorEnabled) {
+        cursor.style.left = e.clientX - 12 + 'px';
+        cursor.style.top = e.clientY - 12 + 'px';
+      }
+    }
+
+    function toggleCustomCursor() {
+      isCustomCursorEnabled = !isCustomCursorEnabled;
+      cursor.style.display = isCustomCursorEnabled ? 'block' : 'none';
+      document.body.classList.toggle('custom-cursor-enabled', isCustomCursorEnabled);
+    }
+
+    document.addEventListener('mousemove', updateCursorPosition);
+    cursorToggle.addEventListener('click', toggleCustomCursor);
+  </script>
 </head>
 <body>
   <!-- Loading Screen -->
