@@ -75,7 +75,9 @@
       background-color: #0a0a0a;
       position: relative;
       min-height: 100vh;
-      padding-top: 60px; /* Adjust this value based on your nav height */
+      padding-top: 60px;
+      width: 100%;
+      overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
     /* Particles Background */
@@ -95,6 +97,8 @@
       z-index: 1;
       margin-top: 0;
       pointer-events: auto;
+      width: 100%;
+      overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
     /* Navigation */
@@ -207,10 +211,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: visible;
+      overflow: hidden; /* Change from visible to hidden */
       padding-bottom: 0;
       pointer-events: none;
-      margin-bottom: 60px; /* Add space for nav menu */
+      margin-bottom: 60px;
     }
 
     #header-particles {
@@ -231,6 +235,7 @@
       max-width: 800px;
       padding: 0 20px;
       pointer-events: none;
+      width: 100%; /* Ensure full width */
     }
 
     /* Profile Picture Shine Effect */
@@ -357,14 +362,27 @@
     }
 
     @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem; /* Reduce font size on mobile */
+        word-wrap: break-word; /* Ensure text wraps */
+      }
+
+      .hero-content p {
+        font-size: 1.2rem; /* Reduce font size on mobile */
+        padding: 0 15px; /* Add some padding */
+      }
+
       .hero-text .social-links {
         flex-direction: column;
         gap: 15px;
         align-items: center;
+        width: 100%; /* Ensure full width */
+        padding: 0 20px; /* Add padding */
       }
 
       .hero-text .social-link {
-        width: 200px;
+        width: 100%; /* Make links full width */
+        max-width: 200px; /* But limit their maximum width */
         justify-content: center;
       }
     }
@@ -528,13 +546,13 @@
     }
 
     .about-paragraphs {
-      max-height: 300px;
-      overflow-y: auto;
+      overflow-y: visible;
       padding-right: 20px;
       position: relative;
       scrollbar-width: thin;
       scrollbar-color: rgba(132, 94, 194, 0.5) rgba(20, 20, 20, 0.1);
       padding-bottom: 30px;
+      text-align: left;
     }
 
     /* Move scroll hint animations to mobile media query */
@@ -657,12 +675,13 @@
     }
 
     .about-paragraphs {
-      max-height: 300px;
-      overflow-y: auto;
+      overflow-y: visible;
       padding-right: 20px;
       position: relative;
       scrollbar-width: thin;
       scrollbar-color: rgba(132, 94, 194, 0.5) rgba(20, 20, 20, 0.1);
+      padding-bottom: 30px;
+      text-align: left;
     }
 
     /* Webkit scrollbar styles */
@@ -986,8 +1005,7 @@
     }
 
     .about-paragraphs {
-      max-height: 400px;
-      overflow-y: auto;
+      overflow-y: visible;
       padding-right: 20px;
       position: relative;
       scrollbar-width: thin;
@@ -2210,6 +2228,73 @@
       font-size: 1rem;
       line-height: 1.6;
     }
+
+    /* Add Coming Soon project styles */
+    .project-item.coming-soon .project-image {
+      background: linear-gradient(45deg, rgba(20, 20, 20, 0.8), rgba(40, 40, 40, 0.8));
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .project-item.coming-soon .project-image::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        transparent 40%,
+        rgba(132, 94, 194, 0.4) 45%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(132, 94, 194, 0.4) 55%,
+        transparent 60%,
+        transparent
+      );
+      transform: rotate(45deg);
+      animation: shine 3s infinite;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .project-item.coming-soon .preview-container {
+      background: rgba(30, 30, 30, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .project-item.coming-soon .preview-container i {
+      font-size: 4rem;
+      color: rgba(132, 94, 194, 0.8);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    .project-item.coming-soon .preview-container h3 {
+      font-size: 2rem;
+      color: #ffffff;
+      text-align: center;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(132, 94, 194, 0.6);
+    }
+
+    .project-item.coming-soon .preview-container p {
+      color: #cccccc;
+      text-align: center;
+      max-width: 80%;
+      margin: 0;
+    }
   </style>
   <script>
     // Header particles configuration (cosmic theme)
@@ -2717,6 +2802,30 @@
             <span>Arduino</span>
             <span>OpenCV</span>
             <span>NumPy</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-item coming-soon">
+        <div class="project-content">
+          <h3>Coming Soon</h3>
+          <p>A new exciting project is in development! Stay tuned for something special that combines modern web technologies with innovative features. This upcoming project will showcase the latest in web development practices and user experience design.</p>
+          <div class="tech-stack">
+            <span>React</span>
+            <span>Node.js</span>
+            <span>MongoDB</span>
+            <span>WebGL</span>
+          </div>
+        </div>
+        <div class="project-image">
+          <div class="preview-container">
+            <i class="fas fa-code-branch"></i>
+            <h3>Under Development</h3>
+            <p>Exciting features coming your way!</p>
+          </div>
+          <h3>New Project</h3>
+          <div class="tech-stack">
+            <span>Coming Soon</span>
           </div>
         </div>
       </div>
