@@ -2025,6 +2025,185 @@
         padding-right: 40px; /* Add space for the arrow */
       }
     }
+
+    /* Add these styles for the category tabs */
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      gap: 20px;
+      position: relative;
+    }
+
+    .category-tab {
+      padding: 10px 20px;
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid rgba(132, 94, 194, 0.3);
+      border-radius: 6px;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .category-tab.active {
+      background: rgba(132, 94, 194, 0.2);
+      border-color: rgba(132, 94, 194, 0.8);
+    }
+
+    .category-tab:hover {
+      border-color: rgba(132, 94, 194, 0.8);
+    }
+
+    .categories-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: auto;
+    }
+
+    .categories-slider {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%;
+      min-height: 400px; /* Set minimum height */
+    }
+
+    .category-content {
+      min-width: 100%;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 0 20px;
+      height: 100%;
+      overflow-y: auto;
+      max-height: 500px; /* Set maximum height */
+    }
+
+    .category-content.active {
+      opacity: 1;
+    }
+
+    /* Ensure consistent spacing in education items */
+    .education-item {
+      margin-bottom: 20px;
+    }
+    .education-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .categories-slider {
+        min-height: 450px; /* Slightly taller on mobile */
+      }
+
+      .category-content {
+        padding: 0 15px;
+        max-height: 450px;
+      }
+
+      /* Improve scrollbar appearance on mobile */
+      .category-content::-webkit-scrollbar {
+        width: 4px;
+      }
+
+      .category-content::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+      }
+
+      .category-content::-webkit-scrollbar-thumb {
+        background: rgba(132, 94, 194, 0.5);
+        border-radius: 2px;
+      }
+    }
+
+    /* Smaller mobile devices */
+    @media (max-width: 480px) {
+      .categories-slider {
+        min-height: 500px; /* Even taller on smaller devices */
+      }
+
+      .category-content {
+        max-height: 500px;
+      }
+    }
+
+    /* Ensure about paragraphs maintain proper spacing */
+    .about-paragraphs p {
+      margin-bottom: 15px;
+    }
+    .about-paragraphs p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Add fade effect at the bottom of scrollable content */
+    .category-content::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .category-content.active::after {
+      opacity: 1;
+    }
+
+    /* Remove swipe indicator styles */
+    .swipe-indicator {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .category-tabs {
+        overflow-x: auto;
+        padding: 0 20px;  /* Reduced padding since we removed the arrows */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      
+      .category-tabs::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    /* Education styles */
+    .education-item {
+      background: rgba(20, 20, 20, 0.8);
+      border: 1px solid rgba(132, 94, 194, 0.3);
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .education-item:hover {
+      border-color: rgba(132, 94, 194, 0.8);
+      transform: translateY(-2px);
+    }
+
+    .education-item h4 {
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .education-item .period {
+      color: rgba(132, 94, 194, 0.8);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .education-item p {
+      color: #cccccc;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
   </style>
   <script>
     // Header particles configuration (cosmic theme)
@@ -2227,20 +2406,67 @@
     <section class="about-section" id="about">
       <div class="about-content">
         <h2>About Me</h2>
-        <div class="about-paragraphs">
-          <p>I am a passionate full-stack developer with a keen interest in building modern web applications. My journey in software development started with a curiosity for creating interactive experiences and has evolved into a professional pursuit of crafting efficient, scalable solutions.</p>
-          
-          <p>With expertise in both front-end and back-end technologies, I strive to create applications that not only function flawlessly but also provide an exceptional user experience. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.</p>
-          
-          <p>My approach to development combines creativity with technical precision. I believe in writing clean, maintainable code and implementing best practices to ensure long-term sustainability of projects. Whether it's crafting responsive user interfaces or optimizing backend performance, I enjoy tackling challenges that push my boundaries.</p>
-          
-          <p>Beyond coding, I'm deeply interested in user experience design and accessibility. I believe that great software should be both powerful and inclusive, accessible to users of all abilities. This philosophy guides my development process, from initial concept to final implementation.</p>
-          
-          <p>In my projects, I focus on creating intuitive interfaces that enhance user engagement while maintaining robust backend systems that ensure reliability and performance. I have experience working with modern frameworks and tools, allowing me to build scalable applications that meet current industry standards.</p>
+        
+        <div class="category-tabs">
+          <div class="category-tab active" data-category="about">About</div>
+          <div class="category-tab" data-category="education">Education</div>
+          <div class="category-tab" data-category="experience">Experience</div>
+        </div>
 
-          <p>I'm particularly passionate about optimizing application performance and implementing efficient algorithms. My background in both frontend and backend development allows me to approach problems holistically, considering both user experience and system architecture in my solutions.</p>
+        <div class="categories-container">
+          <div class="categories-slider">
+            <div class="category-content about-paragraphs active" data-category="about">
+              <p>I am a passionate full-stack developer with a keen interest in building modern web applications. My journey in software development started with a curiosity for creating interactive experiences and has evolved into a professional pursuit of crafting efficient, scalable solutions.</p>
+              
+              <p>With expertise in both front-end and back-end technologies, I strive to create applications that not only function flawlessly but also provide an exceptional user experience. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.</p>
+              
+              <p>My approach to development combines creativity with technical precision. I believe in writing clean, maintainable code and implementing best practices to ensure long-term sustainability of projects. Whether it's crafting responsive user interfaces or optimizing backend performance, I enjoy tackling challenges that push my boundaries.</p>
+              
+              <p>Beyond coding, I'm deeply interested in user experience design and accessibility. I believe that great software should be both powerful and inclusive, accessible to users of all abilities. This philosophy guides my development process, from initial concept to final implementation.</p>
+              
+              <p>In my projects, I focus on creating intuitive interfaces that enhance user engagement while maintaining robust backend systems that ensure reliability and performance. I have experience working with modern frameworks and tools, allowing me to build scalable applications that meet current industry standards.</p>
 
-          <p>When I'm not coding, I enjoy contributing to open-source projects and staying updated with the latest technological trends. I believe in the power of community-driven development and regularly participate in tech meetups and online forums to share knowledge and learn from others.</p>
+              <p>I'm particularly passionate about optimizing application performance and implementing efficient algorithms. My background in both frontend and backend development allows me to approach problems holistically, considering both user experience and system architecture in my solutions.</p>
+
+              <p>When I'm not coding, I enjoy contributing to open-source projects and staying updated with the latest technological trends. I believe in the power of community-driven development and regularly participate in tech meetups and online forums to share knowledge and learn from others.</p>
+            </div>
+
+            <div class="category-content" data-category="education">
+              <div class="education-item">
+                <h4>Bachelor of Science in Computer Science</h4>
+                <div class="period">2022 - 2025</div>
+                <p>Montclair State University, Montclair NJ</p>
+                <p>Relevant coursework: Data Structures, Algorithms, Web Development, Database Systems, Software Engineering</p>
+              </div>
+
+              <div class="education-item">
+                <h4>Associate of Science in Computer Science</h4>
+                <div class="period">2017 - 2022</div>
+                <p>Bergen Community College, Paramus NJ</p>
+                <p>Relevant coursework: Programming Fundamentals, Object-Oriented Programming, Computer Architecture</p>
+              </div>
+            </div>
+
+            <div class="category-content" data-category="experience">
+              <div class="education-item">
+                <h4>Full Stack Developer Intern</h4>
+                <div class="period">Summer 2023</div>
+                <p>Tech Solutions Inc.</p>
+                <p>• Developed and maintained web applications using React.js and Node.js</p>
+                <p>• Collaborated with senior developers on implementing new features</p>
+                <p>• Participated in code reviews and agile development processes</p>
+              </div>
+
+              <div class="education-item">
+                <h4>Student Web Developer</h4>
+                <div class="period">2022 - Present</div>
+                <p>University IT Department</p>
+                <p>• Maintain and update department websites</p>
+                <p>• Create responsive layouts and implement accessibility features</p>
+                <p>• Optimize website performance and user experience</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       
@@ -2659,12 +2885,17 @@
 
       // Eye movement effect
       document.addEventListener('mousemove', (e) => {
+        const eyes = document.querySelector('.eyes');
         if (eyes) {
-          const mouseX = (eyes.getBoundingClientRect().left);
-          const mouseY = (eyes.getBoundingClientRect().top);
-          const radianDegrees = Math.atan2(e.pageX - mouseX, e.pageY - mouseY);
-          const rotationDegrees = (radianDegrees * (180/ Math.PI) * -1) + 180;
-          eyes.style.transform = `rotate(${rotationDegrees}deg)`;
+          const eyeRect = eyes.getBoundingClientRect();
+          const eyeCenterX = eyeRect.left + (eyeRect.width / 2);
+          const eyeCenterY = eyeRect.top + (eyeRect.height / 2);
+          
+          // Calculate angle between cursor and eye center
+          const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
+          const rotation = (angle * 180 / Math.PI) + 90; // Convert to degrees and adjust offset
+          
+          eyes.style.transform = `rotate(${rotation}deg)`;
         }
       });
 
@@ -3547,6 +3778,68 @@
           });
         });
       }
+    });
+
+    // Add this to your script section
+    document.addEventListener('DOMContentLoaded', () => {
+      const categoryTabs = document.querySelectorAll('.category-tab');
+      const categoryContents = document.querySelectorAll('.category-content');
+      const categoriesSlider = document.querySelector('.categories-slider');
+
+      let currentCategory = 0;
+      const totalCategories = categoryTabs.length;
+
+      function updateCategories(index) {
+        // Update tabs
+        categoryTabs.forEach(tab => tab.classList.remove('active'));
+        categoryTabs[index].classList.add('active');
+
+        // Update content
+        categoriesSlider.style.transform = `translateX(-${index * 100}%)`;
+        categoryContents.forEach(content => content.classList.remove('active'));
+        categoryContents[index].classList.add('active');
+      }
+
+      // Tab click handlers
+      categoryTabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          currentCategory = index;
+          updateCategories(currentCategory);
+        });
+      });
+
+      // Touch swipe functionality
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      categoriesSlider.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      categoriesSlider.addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0 && currentCategory < totalCategories - 1) {
+            // Swipe left
+            currentCategory++;
+            updateCategories(currentCategory);
+          } else if (diff < 0 && currentCategory > 0) {
+            // Swipe right
+            currentCategory--;
+            updateCategories(currentCategory);
+          }
+        }
+      }
+
+      // Initialize categories
+      updateCategories(currentCategory);
     });
   </script>
 </body>
