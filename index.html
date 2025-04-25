@@ -2332,6 +2332,53 @@
       50% { transform: scale(1.1); opacity: 1; }
       100% { transform: scale(1); opacity: 0.8; }
     }
+
+    /* Custom cursor styles */
+    .custom-cursor {
+      width: 24px;
+    }
+
+    /* Coursework Grid Styles */
+    .coursework-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .course-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.3s ease;
+    }
+
+    .course-card:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .course-card i {
+      font-size: 1.25rem;
+      color: #64ffda;
+      min-width: 24px;
+    }
+
+    .course-card span {
+      font-size: 0.9rem;
+      color: #e6f1ff;
+    }
+
+    @media (max-width: 768px) {
+      .coursework-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      }
+    }
   </style>
   <script>
     // Header particles configuration (cosmic theme)
@@ -2502,7 +2549,7 @@
       </div>
       <div class="hero-text">
         <h1>Joan Morillo</h1>
-        <p>Hey, I'm Joan (pronounced "Yo-han"). Here, you can check out what I'm working on. Hope you like it! ❤</p>
+        <p>Hi there! My name is Joan (pronounced "Yo-han"). Here you can check out what I'm working on. Hope you like enjoy it!</p>
         <div class="social-links">
           <a href="https://www.linkedin.com/in/joanmorillo/" class="social-link" target="_blank">
             <i class="fab fa-linkedin"></i>
@@ -2544,19 +2591,46 @@
         <div class="categories-container">
           <div class="categories-slider">
             <div class="category-content about-paragraphs active" data-category="about">
-              <p>I am a passionate full-stack developer with a keen interest in building modern web applications. My journey in software development started with a curiosity for creating interactive experiences and has evolved into a professional pursuit of crafting efficient, scalable solutions.</p>
+              <p>
+                I am a passionate full-stack developer with a keen interest in building modern web applications. 
+                My journey in software development started with a curiosity for creating interactive experiences 
+                and has evolved into a professional pursuit of crafting efficient, scalable solutions.
+              </p>
               
-              <p>With expertise in both front-end and back-end technologies, I strive to create applications that not only function flawlessly but also provide an exceptional user experience. I'm constantly learning and adapting to new technologies to stay at the forefront of web development.</p>
+              <p>
+                With expertise in both front-end and back-end technologies, I strive to create applications that not 
+                only function flawlessly but also provide an exceptional user experience. I'm constantly learning 
+                and adapting to new technologies to stay at the forefront of web development.
+              </p>
               
-              <p>My approach to development combines creativity with technical precision. I believe in writing clean, maintainable code and implementing best practices to ensure long-term sustainability of projects. Whether it's crafting responsive user interfaces or optimizing backend performance, I enjoy tackling challenges that push my boundaries.</p>
+              <p>
+                My approach to development combines creativity with technical precision. I believe in writing clean, 
+                maintainable code and implementing best practices to ensure long-term sustainability of projects. 
+                Whether it's crafting responsive user interfaces or optimizing backend performance, I enjoy tackling challenges that push my boundaries.
+              </p>
               
-              <p>Beyond coding, I'm deeply interested in user experience design and accessibility. I believe that great software should be both powerful and inclusive, accessible to users of all abilities. This philosophy guides my development process, from initial concept to final implementation.</p>
+              <p>
+                Beyond coding, I'm deeply interested in user experience design and accessibility. 
+                I believe that great software should be both powerful and inclusive, accessible to users of all abilities. 
+                This philosophy guides my development process, from initial concept to final implementation.
+              </p>
               
-              <p>In my projects, I focus on creating intuitive interfaces that enhance user engagement while maintaining robust backend systems that ensure reliability and performance. I have experience working with modern frameworks and tools, allowing me to build scalable applications that meet current industry standards.</p>
+              <p>
+                In my projects, I focus on creating intuitive interfaces that enhance user engagement while maintaining robust backend systems 
+                that ensure reliability and performance. I have experience working with modern frameworks and tools, allowing me to build scalable 
+                applications that meet current industry standards.
+              </p>
 
-              <p>I'm particularly passionate about optimizing application performance and implementing efficient algorithms. My background in both frontend and backend development allows me to approach problems holistically, considering both user experience and system architecture in my solutions.</p>
+              <p>
+                I'm particularly passionate about optimizing application performance and implementing efficient algorithms. 
+                My background in both frontend and backend development allows me to approach problems holistically, 
+                considering both user experience and system architecture in my solutions.
+              </p>
 
-              <p>When I'm not coding, I enjoy contributing to open-source projects and staying updated with the latest technological trends. I believe in the power of community-driven development and regularly participate in tech meetups and online forums to share knowledge and learn from others.</p>
+              <p>
+                When I'm not coding, I enjoy contributing to open-source projects and staying updated with the latest technological trends. 
+                I believe in the power of community-driven development and regularly participate in tech meetups and online forums to share knowledge and learn from others.
+              </p>
             </div>
 
             <div class="category-content" data-category="education">
@@ -2564,14 +2638,56 @@
                 <h4>Bachelor of Science in Computer Science</h4>
                 <div class="period">2022 - 2025</div>
                 <p>Montclair State University, Montclair NJ</p>
-                <p>Relevant coursework: Data Structures, Algorithms, Web Development, Database Systems, Software Engineering</p>
+                <div class="coursework-grid">
+                  <div class="course-card">
+                    <i class="fas fa-code"></i>
+                    <span>Data Structures & Algorithms</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-globe"></i>
+                    <span>Web Development</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-database"></i>
+                    <span>Database Systems</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Software Engineering</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Computer Networks</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-microchip"></i>
+                    <span>Operating Systems</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-brain"></i>
+                    <span>Artificial Intelligence</span>
+                  </div>
+                </div>
               </div>
 
               <div class="education-item">
                 <h4>Associate of Science in Computer Science</h4>
                 <div class="period">2017 - 2022</div>
                 <p>Bergen Community College, Paramus NJ</p>
-                <p>Relevant coursework: Programming Fundamentals, Object-Oriented Programming, Computer Architecture</p>
+                <div class="coursework-grid">
+                  <div class="course-card">
+                    <i class="fas fa-terminal"></i>
+                    <span>Programming Fundamentals</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-cubes"></i>
+                    <span>Object-Oriented Programming</span>
+                  </div>
+                  <div class="course-card">
+                    <i class="fas fa-microchip"></i>
+                    <span>Computer Architecture</span>
+                  </div>
+                </div>
               </div>
             </div>
 
