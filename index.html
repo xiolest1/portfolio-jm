@@ -115,7 +115,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      will-change: transform;
     }
     
     .nav-menu.nav-floating {
@@ -950,12 +951,21 @@
     @media (max-width: 768px) {
       .skills-container {
         display: flex;
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        height: auto;
+        overflow: visible;
+      }
+
+      .skills-row {
+        display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
-        padding: 15px;
         gap: 15px;
+        padding-bottom: 5px;
       }
 
       .skill-item {
@@ -963,6 +973,14 @@
         width: 120px;
         height: 120px;
         scroll-snap-align: center;
+        margin: 0;
+      }
+
+      .mobile-arrow {
+        font-size: 24px;
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
       }
 
       .skill-logo {
@@ -980,9 +998,19 @@
         gap: 10px;
       }
 
+      .skills-row {
+        gap: 10px;
+      }
+
       .skill-item {
         width: 100px;
         height: 100px;
+      }
+
+      .mobile-arrow {
+        font-size: 22px;
+        right: 10px;
+        bottom: 10px;
       }
 
       .skill-logo {
@@ -1063,32 +1091,59 @@
       }
 
       .skills-container {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        padding: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 15px;
+        padding: 15px;
+        overflow-x: hidden;
+      }
+
+      .skill-item {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto;
+      }
+
+      .mobile-arrow {
+        font-size: 24px; /* Increased from default size */
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+      }
+
+      .skill-logo {
+        font-size: 1.8rem;
+      }
+
+      .skill-name {
+        font-size: 0.85rem;
       }
     }
 
-    /* Mobile */
     @media (max-width: 480px) {
       .skills-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        gap: 10px;
         padding: 10px;
       }
 
       .skill-item {
-        padding: 8px 6px;
+        width: 100px;
+        height: 100px;
+      }
+
+      .mobile-arrow {
+        font-size: 22px; /* Slightly smaller for very small screens but still larger than original */
+        right: 10px;
+        bottom: 10px;
       }
 
       .skill-logo {
-        font-size: 1.4rem;
-        margin-bottom: 5px;
+        font-size: 1.5rem;
       }
 
       .skill-name {
-        font-size: 0.7rem;
-        bottom: 6px;
+        font-size: 0.8rem;
       }
     }
 
@@ -2470,6 +2525,87 @@
       .company-name,
       .experience-details li {
         padding-left: 2.75rem;
+      }
+    }
+
+    /* Desktop/default view styles */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(85px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .skill-item {
+      width: 85px;
+      height: 85px;
+      margin: 0 auto;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .skills-container {
+        display: grid;
+        grid-template-columns: repeat(6, 90px);
+        grid-template-rows: repeat(2, 90px);
+        grid-auto-flow: column;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding: 15px;
+        /* Prevent layout shift */
+        margin: 0 auto;
+        max-width: calc(100vw - 30px);
+      }
+
+      .skill-item {
+        scroll-snap-align: start;
+        width: 90px;
+        height: 90px;
+        transform: none !important; /* Prevent parallax on mobile */
+      }
+
+      .skill-logo {
+        font-size: 1.6rem;
+      }
+
+      .mobile-arrow {
+        font-size: 24px;
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .skills-container {
+        grid-template-columns: repeat(6, 80px);
+        grid-template-rows: repeat(2, 80px);
+        gap: 10px;
+        padding: 10px;
+        max-width: calc(100vw - 20px);
+      }
+
+      .skill-item {
+        width: 80px;
+        height: 80px;
+      }
+
+      .mobile-arrow {
+        font-size: 22px;
+        right: 10px;
+        bottom: 10px;
+      }
+
+      .skill-logo {
+        font-size: 1.4rem;
+      }
+
+      .skill-name {
+        font-size: 0.75rem;
       }
     }
   </style>
@@ -4275,6 +4411,126 @@
       window.addEventListener('resize', () => {
         navTop = navMenu.offsetTop;
       });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const navMenu = document.querySelector('.nav-menu');
+      let lastScrollY = window.scrollY;
+      let isFloating = false;
+      const scrollThreshold = 100;
+      let resizeTimer;
+
+      // Debounced resize handler
+      function handleResize() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          // Reset navigation states
+          navMenu.classList.remove('nav-floating', 'show', 'sticky');
+          isFloating = false;
+          lastScrollY = window.scrollY;
+          
+          // Reset technical skills
+          const skillsContainer = document.querySelector('.skills-container');
+          const skillItems = document.querySelectorAll('.skill-item');
+          
+          if (skillsContainer) {
+            skillsContainer.scrollLeft = 0;
+            skillItems.forEach(item => {
+              item.style.transform = '';
+              item.style.animationDelay = '';
+            });
+            
+            // Remove any existing carousel dots
+            const existingDots = document.querySelector('.carousel-dots');
+            if (existingDots) {
+              existingDots.remove();
+            }
+            
+            // Reinitialize mobile carousel if needed
+            if (window.innerWidth <= 768) {
+              initializeMobileCarousel();
+            }
+          }
+        }, 250);
+      }
+
+      // Throttled scroll handler
+      let ticking = false;
+      function handleScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            const currentScrollY = window.scrollY;
+            const scrollingUp = currentScrollY < lastScrollY;
+
+            if (currentScrollY > scrollThreshold) {
+              if (!isFloating) {
+                navMenu.classList.add('nav-floating');
+                isFloating = true;
+              }
+              
+              navMenu.classList.toggle('show', scrollingUp);
+            } else {
+              navMenu.classList.remove('nav-floating', 'show');
+              isFloating = false;
+            }
+
+            lastScrollY = currentScrollY;
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+
+      // Initialize mobile carousel
+      function initializeMobileCarousel() {
+        const skillsContainer = document.querySelector('.skills-container');
+        const skillItems = document.querySelectorAll('.skill-item');
+        
+        if (!skillsContainer || window.innerWidth > 768) return;
+
+        // Create carousel dots
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'carousel-dots';
+        const numDots = Math.ceil(skillItems.length / 6); // 2 rows x 3 visible items
+        
+        for (let i = 0; i < numDots; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.addEventListener('click', () => {
+            skillsContainer.scrollTo({
+              left: i * skillsContainer.offsetWidth,
+              behavior: 'smooth'
+            });
+          });
+          dotsContainer.appendChild(dot);
+        }
+        
+        skillsContainer.parentNode.insertBefore(dotsContainer, skillsContainer.nextSibling);
+
+        // Update dots on scroll with throttling
+        let scrollTimer;
+        skillsContainer.addEventListener('scroll', () => {
+          if (scrollTimer) return;
+          scrollTimer = setTimeout(() => {
+            const scrollPos = skillsContainer.scrollLeft;
+            const activeIndex = Math.round(scrollPos / skillsContainer.offsetWidth);
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+              dot.classList.toggle('active', index === activeIndex);
+            });
+            scrollTimer = null;
+          }, 100);
+        });
+      }
+
+      // Event listeners
+      window.addEventListener('resize', handleResize);
+      window.addEventListener('scroll', handleScroll);
+      
+      // Initial setup
+      handleScroll();
+      if (window.innerWidth <= 768) {
+        initializeMobileCarousel();
+      }
     });
   </script>
 </body>
