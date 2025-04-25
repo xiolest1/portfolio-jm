@@ -1,18 +1,16 @@
-# Joan Morillo's Portfolio Website
+# Portfolio Website
 
-A modern, interactive portfolio website showcasing my skills, projects, and professional journey in software development.
+A modern portfolio website showcasing my skills, projects, and journey in software development.
 
 ## Live Demo
 [View Portfolio](https://portfolio-jm-rouge.vercel.app/)
 
 ## Features
 - 🎨 Modern and responsive design
-- 🌟 Interactive particle effects and animations
-- 📱 Mobile-friendly navigation
-- 🎯 Smooth scrolling sections
-- 💼 Project showcase with detailed descriptions
+- 📱 Mobile-friendly
+- 💼 Project showcase
 - 📚 Education and experience timeline
-- 🛠️ Technical skills display with hover effects
+- 🛠️ Technical skills
 - 📧 Contact form with email validation
 - 🌙 Custom cursor and visual effects
 
