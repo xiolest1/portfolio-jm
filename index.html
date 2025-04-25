@@ -1,21 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--
+  Structure:
+  1. Head: Metadata, external libraries (Particles.js, FontAwesome), CSS styles (reset, layout, components), and inline head scripts for particles and custom cursor.
+  2. Body:
+     a. Loading Screen: initial monster & star animation overlay.
+     b. Custom Cursor Elements: toggle button and cursor div.
+     c. Particle Containers: background & header particles, meteor shower, and UFO container.
+     d. Hero Section: profile picture shine effect and intro text with social links.
+     e. Navigation: sticky/floating nav menu with desktop links and mobile hamburger menu.
+     f. Main Content Sections:
+         i. About Section: tabbed content (About, Education, Experience) with sliding categories.
+        ii. Skills Section: interactive flip cards, mobile carousel, and responsive grid layout.
+       iii. Projects Section: animated project cards with live/demo links and tech stacks.
+        iv. Contact Section: form with validation, spam protection, and Formspree integration.
+     g. Footer
+  3. Bottom Scripts: DOMContentLoaded event handlers for loading screen, particles, cursor functionality, IntersectionObservers for animations, navigation highlighting, smooth scrolling, meteor shower, and UFO animations.
+-->
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Joan Morillo's Portfolio - Full-stack developer specializing in modern web applications. Explore my projects in React, Node.js, and more. View my technical skills and get in touch for collaboration opportunities.">
   <title>Joan Morillo | Portfolio</title>
+  <!-- External Libraries: Particles.js for background effects -->
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <!-- External Styles: Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- Global CSS Styles: Reset, layout, components, and animations -->
   <style>
-    /* Reset & Base Styles */
+
+    /* ===== GLOBAL CSS STYLES ===== */
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
-    /* Remove global cursor hiding */
-    /* *, *:hover, *:active, *:focus {
-      cursor: none !important;
-    } */
-
     /* Custom cursor styles */
     .custom-cursor {
       width: 24px;
@@ -26,7 +43,7 @@
       position: fixed;
       pointer-events: none;
       z-index: 99999;
-      display: none; /* Hidden by default */
+      display: none;
     }
 
     /* Hide default cursor when custom cursor is enabled */
@@ -54,7 +71,7 @@
       z-index: 1000;
       transition: all 0.2s ease;
       backdrop-filter: blur(5px);
-      display: none; /* Hidden by default */
+      display: none; 
     }
 
     .cursor-toggle:hover {
@@ -67,6 +84,7 @@
       outline-offset: 2px;
     }
 
+    /* Body & Layout */
     body { 
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
       line-height: 1.6; 
@@ -98,10 +116,10 @@
       margin-top: 0;
       pointer-events: auto;
       width: 100%;
-      overflow-x: hidden; /* Prevent horizontal scroll */
+      overflow-x: hidden; 
     }
 
-    /* Navigation */
+    /* Navigation Menu */
     .nav-menu {
       position: sticky;
       top: 0;
@@ -184,7 +202,7 @@
       transform: scaleX(1);
     }
 
-    /* Update mobile styles */
+    /* Mobile Styles */
     @media (max-width: 768px) {
       .nav-menu {
         padding: 15px 0;
@@ -207,16 +225,16 @@
     /* Hero Section */
     .hero-section {
       position: relative;
-      height: auto; /* Change from 75vh to auto */
-      min-height: 75vh; /* Add min-height instead */
+      height: auto; 
+      min-height: 75vh; 
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding: 40px 0; /* Add padding top and bottom */
+      padding: 40px 0;
       pointer-events: none;
-      margin-bottom: 30px; /* Reduce margin */
+      margin-bottom: 30px;
     }
 
     #header-particles {
@@ -369,7 +387,7 @@
     @media (max-width: 768px) {
       .hero-section {
         padding: 20px 0;
-        min-height: auto; /* Allow content to determine height on mobile */
+        min-height: auto; 
       }
 
       .hero-content {
@@ -383,18 +401,18 @@
         align-items: center;
         width: 100%;
         padding: 0 20px;
-        margin: 15px 0 30px 0; /* Add margin bottom before About Me section */
+        margin: 15px 0 30px 0; 
       }
 
       .hero-text .social-link {
         width: 100%;
         max-width: 200px;
         justify-content: center;
-        padding: 10px 20px; /* Slightly reduce padding */
-        font-size: 0.9rem; /* Slightly reduce font size */
+        padding: 10px 20px; 
+        font-size: 0.9rem; 
       }
 
-      /* Ensure About Me section has proper spacing */
+      
       .about-section {
         padding-top: 30px;
       }
@@ -478,10 +496,10 @@
         flex-direction: column;
         background: rgba(10, 10, 10, 0.95);
         backdrop-filter: blur(5px);
-        padding: 0; /* Remove padding */
+        padding: 0; 
         margin: 0;
         display: none;
-        border-top: 1px solid #333; /* Add top border to dropdown */
+        border-top: 1px solid #333; 
         border-bottom: 1px solid #333;
       }
 
@@ -490,7 +508,7 @@
       }
 
       .nav-menu ul li {
-        margin: 0; /* Remove margins */
+        margin: 0; 
         width: 100%;
         text-align: center;
         border-bottom: 1px solid rgba(51, 51, 51, 0.5);
@@ -506,10 +524,10 @@
         width: 100%;
       }
 
-      /* Add padding to hero section when nav is fixed */
+      /* padding to hero section when nav is fixed */
       .hero-section {
-        padding-top: 60px; /* Space for fixed nav on mobile */
-        margin-bottom: 0; /* Remove margin on mobile */
+        padding-top: 60px; 
+        margin-bottom: 0; 
       }
     }
 
@@ -542,7 +560,7 @@
       gap: 60px;
       max-width: 1400px;
       margin: 0 auto;
-      overflow-x: hidden; /* Prevent horizontal scroll */
+      overflow-x: hidden; 
     }
 
     .about-content {
@@ -554,8 +572,8 @@
       transform: translateX(-50px);
       transition: all 3s ease-out;
       position: relative;
-      width: 100%; /* Ensure content takes full width */
-      box-sizing: border-box; /* Include padding in width calculation */
+      width: 100%; 
+      box-sizing: border-box; 
     }
 
     .about-paragraphs {
@@ -571,7 +589,7 @@
     /* Move scroll hint animations to mobile media query */
 
     @media (max-width: 768px) {
-      /* Add scroll hint animations */
+      /* scroll hint animations */
       @keyframes scrollHint {
         0% { transform: translateX(0); }
         75% { transform: translateX(-10px); }
@@ -902,7 +920,6 @@
       opacity: 1;
     }
 
-    /* C++ Logo specific style */
     .cpp-logo {
       width: 2.5rem;
       height: 2.5rem;
@@ -938,7 +955,7 @@
       }
     }
 
-    /* Add this to ensure proper centering for all skill logos */
+    /* ensure proper centering for all skill logos */
     .skill-logo {
       display: flex;
       align-items: center;
@@ -947,7 +964,7 @@
       padding: 0 !important;
     }
 
-    /* Mobile Experience Improvements */
+    /* Mobile Experiences */
     @media (max-width: 768px) {
       .skills-container {
         display: flex;
@@ -1032,7 +1049,6 @@
       text-align: center;
     }
 
-    /* Update About Me section */
     .about-content {
       flex: 1;
       text-align: center;
@@ -1106,7 +1122,7 @@
       }
 
       .mobile-arrow {
-        font-size: 24px; /* Increased from default size */
+        font-size: 24px; 
         position: absolute;
         right: 15px;
         bottom: 15px;
@@ -1133,7 +1149,7 @@
       }
 
       .mobile-arrow {
-        font-size: 22px; /* Slightly smaller for very small screens but still larger than original */
+        font-size: 22px; 
         right: 10px;
         bottom: 10px;
       }
@@ -1150,7 +1166,7 @@
     /* Projects Section */
     .projects-section {
       position: relative;
-      padding: 50px 20px;  /* Reduced from 100px to 50px */
+      padding: 50px 20px;  
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -1468,7 +1484,6 @@
       border-top: 1px solid #333;
     }
 
-    /* Links */
     a {
       color: rgb(255, 77, 90);
       text-decoration: none;
@@ -1480,14 +1495,12 @@
       text-decoration: none;
     }
 
-    /* Add this to your existing CSS */
     .honeypot-field {
       display: none !important;
       position: absolute !important;
       left: -9999px !important;
     }
 
-    /* Add media query for responsive design */
     @media (max-width: 768px) {
       .about-section {
         flex-direction: column;
@@ -1562,7 +1575,6 @@
       }
     }
 
-    /* Add these CSS rules */
     .skills-section {
       flex: 1;
     }
@@ -1582,7 +1594,6 @@
       transform: translateY(0);
     }
 
-    /* Focus styles for interactive elements */
     a:focus,
     button:focus,
     input:focus,
@@ -1591,28 +1602,24 @@
       outline-offset: 2px;
     }
 
-    /* Remove focus outline when using mouse, but keep it for keyboard */
     :focus:not(:focus-visible) {
       outline: none;
     }
 
-    /* Ensure focus outline is visible when using keyboard */
     :focus-visible {
       outline: 2px solid rgb(255, 77, 90);
       outline-offset: 2px;
     }
 
-    /* Update navigation link focus styles */
     .nav-menu ul li a:focus {
       color: rgb(255, 77, 90);
       outline: 2px solid rgb(255, 77, 90);
       outline-offset: 4px;
     }
 
-    /* Base Styles */
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 100px; /* Offset for fixed header */
+      scroll-padding-top: 100px; 
     }
 
     body { 
@@ -1624,11 +1631,11 @@
       min-height: 100vh;
     }
 
-    /* Section Styles */
+    /* Section */
     section {
-      padding-top: 80px; /* Add padding to sections */
-      margin-top: -80px; /* Offset the padding */
-      scroll-margin-top: 80px; /* Modern browsers support */
+      padding-top: 80px; 
+      margin-top: -80px; 
+      scroll-margin-top: 80px; 
     }
 
     .tech-stack {
@@ -1650,7 +1657,6 @@
       pointer-events: none;
     }
 
-    /* Remove hover styles */
     .tech-stack span:hover {
       background: rgba(132, 94, 194, 0.1);
       border-color: rgba(132, 94, 194, 0.3);
@@ -1660,7 +1666,7 @@
       cursor: pointer;
     }
 
-    /* Add meteor shower styles */
+    /* meteor shower */
     .meteor-shower {
       position: fixed;
       top: 0;
@@ -1696,7 +1702,7 @@
       }
     }
 
-    /* UFO Styles */
+    /* UFO */
     .ufo-container {
       position: fixed;
       top: 0;
@@ -1788,7 +1794,7 @@
       100% { transform: translate(0, -50px); opacity: 1; }
     }
 
-    /* Loading Screen Styles */
+    /* Loading Screen */
     .loading-screen {
       position: fixed;
       top: 0;
@@ -1861,7 +1867,7 @@
       opacity: 1;
     }
 
-    /* Alien Animation Styles */
+    /* Alien Animation */
     .monster {
       font-size: 4rem;
       margin: 0 auto;
@@ -2034,43 +2040,40 @@
 
     @media (max-width: 768px) {
       .hero-section {
-        padding-top: 60px; /* Reduced from 80px */
-        min-height: auto; /* Allow content to determine height */
-        padding-bottom: 30px; /* Reduced padding at bottom */
+        padding-top: 60px; 
+        min-height: auto; 
+        padding-bottom: 30px; 
       }
 
       .about-section {
-        padding-top: 40px; /* Reduced from 100px */
+        padding-top: 40px;
         padding-bottom: 30px;
       }
 
       .hero-content {
-        padding: 10px 20px; /* Reduced padding */
+        padding: 10px 20px; 
       }
 
       .profile-picture {
-        margin-bottom: 20px; /* Reduced margin */
+        margin-bottom: 20px; 
       }
 
       .hero-text .social-links {
-        margin-top: 15px; /* Reduced margin */
+        margin-top: 15px; 
         margin-bottom: 15px;
       }
 
-      /* Ensure proper spacing with fixed nav */
       .main-content {
-        padding-top: 0; /* Remove extra padding since hero section handles it */
+        padding-top: 0; 
       }
 
-      /* Adjust section spacing */
       section {
-        padding-top: 60px; /* Reduced from 80px */
-        margin-top: -60px; /* Adjusted to match padding */
+        padding-top: 60px; 
+        margin-top: -60px; 
         scroll-margin-top: 60px;
       }
     }
 
-    /* Even smaller devices */
     @media (max-width: 480px) {
       .hero-section {
         padding-top: 50px;
@@ -2083,7 +2086,6 @@
       }
     }
 
-    /* Add these styles for the mobile arrow indicator */
     .skills-section {
       position: relative;
     }
@@ -2113,11 +2115,10 @@
       }
 
       .skills-container {
-        padding-right: 40px; /* Add space for the arrow */
+        padding-right: 40px;
       }
     }
 
-    /* Add these styles for the category tabs */
     .category-tabs {
       display: flex;
       justify-content: center;
@@ -2157,7 +2158,7 @@
       display: flex;
       transition: transform 0.5s ease;
       width: 100%;
-      min-height: 400px; /* Set minimum height */
+      min-height: 400px; 
     }
 
     .category-content {
@@ -2167,14 +2168,13 @@
       padding: 0 20px;
       height: 100%;
       overflow-y: auto;
-      max-height: 500px; /* Set maximum height */
+      max-height: 500px; 
     }
 
     .category-content.active {
       opacity: 1;
     }
 
-    /* Ensure consistent spacing in education items */
     .education-item {
       margin-bottom: 20px;
     }
@@ -2182,10 +2182,9 @@
       margin-bottom: 0;
     }
 
-    /* Mobile adjustments */
     @media (max-width: 768px) {
       .categories-slider {
-        min-height: 450px; /* Slightly taller on mobile */
+        min-height: 450px; 
       }
 
       .category-content {
@@ -2193,7 +2192,7 @@
         max-height: 450px;
       }
 
-      /* Improve scrollbar appearance on mobile */
+      /* scrollbar appearance on mobile */
       .category-content::-webkit-scrollbar {
         width: 4px;
       }
@@ -2253,7 +2252,7 @@
     @media (max-width: 768px) {
       .category-tabs {
         overflow-x: auto;
-        padding: 0 20px;  /* Reduced padding since we removed the arrows */
+        padding: 0 20px; 
         scrollbar-width: none;
         -ms-overflow-style: none;
       }
@@ -2297,7 +2296,7 @@
       text-align: center;
     }
 
-    /* Add Coming Soon project styles */
+    /* Coming Soon project styles */
     .project-item.coming-soon .project-image {
       background: linear-gradient(45deg, rgba(20, 20, 20, 0.8), rgba(40, 40, 40, 0.8));
       position: relative;
@@ -2547,94 +2546,89 @@
     @media (max-width: 768px) {
       .skills-container {
         display: grid;
-        grid-template-columns: repeat(6, 90px);
-        grid-template-rows: repeat(2, 90px);
+        grid-template-columns: repeat(6, 85px);
+        grid-template-rows: repeat(2, 85px);
         grid-auto-flow: column;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
-        gap: 20px;
-        padding: 15px;
+        gap: 15px;
+        padding: 20px 15px;
         overflow-y: hidden;
-        height: calc(2 * 90px + 20px + 30px); /* Increased gap in height calculation */
+        height: calc(2 * 85px + 15px + 40px);
         margin: 0 auto;
         max-width: calc(100vw - 30px);
-        align-content: start;
+        align-content: center;
+        width: fit-content;
+        min-width: 100%;
       }
 
       .skill-item {
         scroll-snap-align: start;
-        width: 90px;
-        height: 90px;
+        width: 85px;
+        height: 85px;
         transform: none !important;
+        margin: 0;
+        flex-shrink: 0;
       }
 
       .skill-logo {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .skill-name {
+        font-size: 0.75rem;
+        bottom: 8px;
       }
 
       .mobile-arrow {
-        font-size: 24px;
+        font-size: 22px;
         position: absolute;
-        right: 15px;
-        bottom: 15px;
-      }
-
-      /* Left-align the category tabs on mobile */
-      .category-tabs {
-        justify-content: flex-start;
-        overflow-x: auto;
-        padding: 0 20px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-
-      .category-tabs::-webkit-scrollbar {
-        display: none;
+        right: 12px;
+        bottom: 12px;
       }
     }
 
     @media (max-width: 480px) {
       .skills-container {
-        grid-template-columns: repeat(6, 80px);
-        grid-template-rows: repeat(2, 80px);
-        grid-auto-flow: column;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        gap: 18px;
-        padding: 10px;
-        overflow-y: hidden;
-        height: calc(2 * 80px + 18px + 20px); /* Increased gap in height calculation */
-        margin: 0 auto;
-        max-width: calc(100vw - 20px);
-        align-content: start;
+        grid-template-columns: repeat(6, 75px);
+        grid-template-rows: repeat(2, 75px);
+        gap: 12px;
+        padding: 15px 12px;
+        height: calc(2 * 75px + 12px + 30px);
+        max-width: calc(100vw - 24px);
+        width: fit-content;
+        min-width: 100%;
       }
 
       .skill-item {
-        width: 80px;
-        height: 80px;
-      }
-
-      .mobile-arrow {
-        font-size: 22px;
-        right: 10px;
-        bottom: 10px;
+        width: 75px;
+        height: 75px;
+        flex-shrink: 0;
       }
 
       .skill-logo {
         font-size: 1.4rem;
+        margin-bottom: 6px;
       }
 
       .skill-name {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
+        bottom: 6px;
+      }
+
+      .mobile-arrow {
+        font-size: 20px;
+        right: 10px;
+        bottom: 10px;
       }
     }
   </style>
+  <!-- Head Scripts: Initialize particles and setup custom cursor functionality -->
   <script>
-    // Header particles configuration (cosmic theme)
+    // Header particles config
     const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
     
     const particleConfig = {
@@ -2732,10 +2726,10 @@
       retina_detect: true
     };
 
-    // Initialize header particles
+    // header particles
     particlesJS('header-particles', particleConfig);
 
-    // Initialize background particles with the same config
+    // background particles with the same config
     particlesJS('particles-js', particleConfig);
 
     // Custom cursor functionality
@@ -2768,7 +2762,7 @@
   </script>
 </head>
 <body>
-  <!-- Loading Screen -->
+  <!-- Loading Screen Overlay -->
   <div class="loading-screen">
     <div class="stars" id="stars"></div>
     <div class="monster" style="color: #7cb342">
@@ -2788,12 +2782,16 @@
     <div class="loading-text">Loading...</div>
   </div>
 
+  <!-- Custom Cursor Elements -->
   <div class="custom-cursor"></div>
   <button class="cursor-toggle" id="cursorToggle" aria-label="Toggle custom cursor">Toggle Custom Cursor</button>
+
+  <!-- Particle Effect Containers -->
   <div id="particles-js"></div>
   <div class="meteor-shower"></div>
   <div class="ufo-container"></div>
 
+  <!-- Hero Section: Intro with profile picture and social links -->
   <section class="hero-section" id="hero">
     <div id="header-particles"></div>
     <div class="hero-content">
@@ -2817,6 +2815,7 @@
     </div>
   </section>
 
+  <!-- Navigation Menu: sticky/floating header -->
   <nav class="nav-menu">
     <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
       <span></span>
@@ -2830,7 +2829,9 @@
     </ul>
   </nav>
 
+  <!-- Main Content: About, Skills, Projects, Contact -->
   <div class="main-content">
+    <!-- About Section: tabbed content for about, education, and experience -->
     <section class="about-section" id="about">
       <div class="about-content">
         <h2>About Me</h2>
@@ -3144,6 +3145,7 @@
       </div>
     </section>
 
+    <!-- Projects Section: animated project cards with live/demo links -->
     <section class="projects-section" id="projects">
       <h2>Projects</h2>
       <div class="project-item">
@@ -3264,6 +3266,7 @@
       </div>
     </section>
 
+    <!-- Contact Section: contact form with validation and Formspree integration -->
     <section class="contact-section" id="contact">
       <h2>Contact Me</h2>
       <p class="contact-description">Feel free to reach out for any questions, collaborations, or just to connect!</p>
@@ -3295,11 +3298,13 @@
       </form>
     </section>
 
+    <!-- Footer-->
     <footer>
       <p>&copy; 2025 Joan Morillo. All rights reserved.</p>
     </footer>
   </div>
 
+  <!-- Bottom Scripts Section -->
   <script>
     // Loading Screen Script
     document.addEventListener('DOMContentLoaded', () => {
@@ -3441,7 +3446,7 @@
           
           // Calculate angle between cursor and eye center
           const angle = Math.atan2(e.clientY - eyeCenterY, e.clientX - eyeCenterX);
-          const rotation = (angle * 180 / Math.PI) + 90; // Convert to degrees and adjust offset
+          const rotation = (angle * 180 / Math.PI) + 90; 
           
           eyes.style.transform = `rotate(${rotation}deg)`;
         }
@@ -3556,7 +3561,7 @@
       window.addEventListener('scroll', handleScroll);
     });
 
-    // Header particles configuration (cosmic theme)
+    // Header particles configuration
     particlesJS('header-particles', {
       particles: {
         number: {
@@ -3650,7 +3655,7 @@
       retina_detect: true
     });
 
-    // Background particles configuration (cosmic theme)
+    // Background particles config
     particlesJS('particles-js', {
       particles: {
         number: {
@@ -3765,13 +3770,13 @@
       // Add spam protection checks
       const honeypot = formData.get('honeypot');
       
-      // Check if honeypot field is filled (bots often fill hidden fields)
+      // Check if honeypot field is filled
       if (honeypot) {
         console.log('Bot detected');
         return false;
       }
       
-      // Check for rapid submissions (store last submission time in localStorage)
+      // Check for rapid submissions (stored in localStorage)
       const lastSubmission = localStorage.getItem('lastSubmission');
       const now = Date.now();
       if (lastSubmission && (now - parseInt(lastSubmission)) < 30000) { // 30 seconds cooldown
@@ -3819,9 +3824,7 @@
       }
     });
 
-    // Add this before your existing script content
     document.addEventListener('DOMContentLoaded', () => {
-      // Intersection Observer for about content
       const aboutObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -3830,11 +3833,9 @@
         });
       }, { threshold: 0.3 });
 
-      // Observe about content
       const aboutContent = document.querySelector('.about-content');
       aboutObserver.observe(aboutContent);
 
-      // Intersection Observer for skills title
       const skillsTitleObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -3843,22 +3844,19 @@
         });
       }, { threshold: 0.5 });
 
-      // Observe skills title
       const skillsTitle = document.querySelector('.skills-section h3');
       skillsTitleObserver.observe(skillsTitle);
 
-      // Intersection Observer for skill logos with delay
       const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
               entry.target.classList.add('animate');
-            }, index * 250); // Increased from 150ms to 250ms delay between each skill
+            }, index * 250); // 250ms delay between each skill
           }
         });
       }, { threshold: 0.1 });
 
-      // Observe all skill logos
       const skillLogos = document.querySelectorAll('.skill-logo');
       skillLogos.forEach(logo => skillObserver.observe(logo));
 
@@ -3869,9 +3867,7 @@
       }, 500); // Small delay after page load
     });
 
-    // Add this to your existing script section
     document.addEventListener('DOMContentLoaded', () => {
-      // Project items observer
       const projectObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -3880,15 +3876,12 @@
         });
       }, { threshold: 0.2 });
 
-      // Observe all project items
       const projectItems = document.querySelectorAll('.project-item');
       projectItems.forEach(item => projectObserver.observe(item));
 
-      // Observe Projects header
       const projectsHeader = document.querySelector('.projects-section h2');
       projectObserver.observe(projectsHeader);
 
-      // Contact form observer
       const contactFormObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -3897,18 +3890,15 @@
         });
       }, { threshold: 0.2 });
 
-      // Observe contact form and description
       const contactForm = document.querySelector('.contact-form');
       const contactDescription = document.querySelector('.contact-description');
       contactFormObserver.observe(contactForm);
       contactFormObserver.observe(contactDescription);
 
-      // Observe Contact header
       const contactHeader = document.querySelector('.contact-section h2');
       contactFormObserver.observe(contactHeader);
     });
 
-    // Add this to your existing script section
     document.addEventListener('DOMContentLoaded', () => {
       // Hamburger menu functionality
       const hamburger = document.getElementById('hamburger');
@@ -4004,7 +3994,7 @@
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
             
             window.scrollTo({
-              top: targetPosition - navHeight - 20, // Additional 20px buffer
+              top: targetPosition - navHeight - 20,
               behavior: 'smooth'
             });
 
@@ -4032,9 +4022,7 @@
       }
     });
 
-    // Add this to your existing script section at the bottom
     document.addEventListener('DOMContentLoaded', () => {
-      // Existing code...
 
       // Meteor shower effect
       const meteorShower = document.querySelector('.meteor-shower');
@@ -4086,9 +4074,7 @@
       startMeteorShower();
     });
 
-    // Replace the UFO JavaScript code
     document.addEventListener('DOMContentLoaded', () => {
-      // Existing code...
 
       // UFO effect
       const ufoContainer = document.querySelector('.ufo-container');
@@ -4159,7 +4145,6 @@
       setTimeout(() => createUfo(2), 2000);
     });
 
-    // Add this before your existing script content
     document.addEventListener('DOMContentLoaded', () => {
       const nav = document.querySelector('nav');
       let lastScrollY = window.scrollY;
@@ -4222,9 +4207,7 @@
       });
     });
 
-    // Add this to your script section
     document.addEventListener('DOMContentLoaded', () => {
-      // Existing observers...
 
       // Skills section animation
       const skillsObserver = new IntersectionObserver((entries) => {
@@ -4259,7 +4242,6 @@
       }
     });
 
-    // Add this to your script section
     document.addEventListener('DOMContentLoaded', () => {
       // Track mouse position for particle effects
       document.addEventListener('mousemove', (e) => {
@@ -4323,7 +4305,7 @@
       }
     });
 
-    // Add this to your script section
+
     document.addEventListener('DOMContentLoaded', () => {
       const categoryTabs = document.querySelectorAll('.category-tab');
       const categoryContents = document.querySelectorAll('.category-content');
